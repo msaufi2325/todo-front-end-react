@@ -4,11 +4,8 @@ function App() {
   const [jwtToken, setJwtToken] = useState<string>("")
 
   return (
-    <main className="container px-3">
+    <main className="container p-3">
       <div className="row-auto">
-        <div className="col-auto">
-          <h1 className="font-bold text-3xl mt-3">Todo</h1>
-        </div>
         <div className="col-auto text-end">
           {jwtToken === "" ? (
             <button
@@ -26,9 +23,12 @@ function App() {
             </button>
           )}
         </div>
+        <div className="col-auto">
+          <h1 className="font-bold text-3xl mt-3">My Todo</h1>
+        </div>
       </div>
     </main>
-  )
+  );
 }
 
 export default App
