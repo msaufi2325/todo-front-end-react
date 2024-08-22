@@ -24,8 +24,9 @@ function App() {
           )}
         </div>
         <div className="col-auto">
-          <h1 className="font-bold text-3xl mt-3">My Todo</h1>
+          <h1 className="font-bold text-3xl p-3">My Todo</h1>
         </div>
+        <hr className="mb-3"></hr>
       </div>
     </main>
   );
