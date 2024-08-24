@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function App() {
-  const [jwtToken, setJwtToken] = useState<string>("")
+  const [jwtToken, setJwtToken] = useState<string>("");
 
   return (
     <main className="container p-3">
@@ -24,7 +25,13 @@ function App() {
           )}
         </div>
         <div className="col-auto">
-          <h1 className="font-bold text-3xl p-3">My Todo</h1>
+          <Link to="/">
+            <h1 className="font-bold text-2xl p-3">
+              <span className="bg-blue-300 px-1 rounded-md hover:bg-blue-500">
+                My Todo
+              </span>
+            </h1>
+          </Link>
         </div>
         <hr className="mb-3"></hr>
       </div>
@@ -32,4 +39,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
