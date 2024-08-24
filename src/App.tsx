@@ -24,7 +24,7 @@ function App() {
             </button>
           )}
         </div>
-        <div className="col-auto">
+        <div className="flex items-start gap-1">
           <Link to="/">
             <h1 className="font-bold text-2xl p-3">
               <span className="bg-blue-300 px-1 rounded-md hover:bg-blue-500">
@@ -32,8 +32,38 @@ function App() {
               </span>
             </h1>
           </Link>
+          <Link to="#!">
+            <h2 className="font-semibold text-xl p-3">
+              <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
+                Completed Items
+              </span>
+            </h2>
+          </Link>
         </div>
         <hr className="mb-3"></hr>
+        <div className="flex items-center gap-1">
+          <Link to="#!">
+            <h2 className="font-semibold text-xl p-1">
+              <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
+                Work
+              </span>
+            </h2>
+          </Link>
+          <Link to="#!">
+            <h2 className="font-semibold text-xl p-1">
+              <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
+                Home
+              </span>
+            </h2>
+          </Link>
+          <Link to="#!">
+            <h2 className="font-semibold text-xl p-1">
+              <span className="bg-blue-200 px-1 rounded-md hover:bg-blue-500">
+                Hobby
+              </span>
+            </h2>
+          </Link>
+        </div>
       </div>
     </main>
   );
