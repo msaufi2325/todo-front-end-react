@@ -64,6 +64,29 @@ function App() {
             </h2>
           </Link>
         </div>
+        <div className="flex items-center gap-1">
+          <Link to="#!">
+            <h2 className="font-semibold text-xl p-1">
+              <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
+                Low Priority
+              </span>
+            </h2>
+          </Link>
+          <Link to="#!">
+            <h2 className="font-semibold text-xl p-1">
+              <span className="bg-orange-200 px-1 rounded-md hover:bg-orange-500">
+                Medium Priority
+              </span>
+            </h2>
+          </Link>
+          <Link to="#!">
+            <h2 className="font-semibold text-xl p-1">
+              <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
+                High Priority
+              </span>
+            </h2>
+          </Link>
+        </div>
       </div>
     </main>
   );
