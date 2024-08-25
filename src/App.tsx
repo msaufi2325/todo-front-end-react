@@ -9,19 +9,17 @@ function App() {
       <div className="row-auto">
         <div className="col-auto text-end">
           {jwtToken === "" ? (
-            <button
-              className="bg-green-500 hover:bg-green-800 text-white px-1 rounded-md"
-              onClick={() => setJwtToken("jwtToken")}
+            <Link to="/login"
+              // onClick={() => setJwtToken("jwtToken")}
             >
-              Login
-            </button>
+              <span className="bg-green-500 hover:bg-green-800 text-white p-1 rounded-md">Login</span>
+            </Link>
           ) : (
-            <button
-              className="bg-red-500 hover:bg-red-800 text-white px-1 rounded-md"
+            <a href="#!"
               onClick={() => setJwtToken("")}
             >
-              Logout
-            </button>
+              <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">Logout</span>
+            </a>
           )}
         </div>
         <div className="flex text-center gap-1">
@@ -43,7 +41,7 @@ function App() {
           )}
         </div>
         <hr className="mb-3"></hr>
-        {jwtToken !== "" ? (
+        {jwtToken !== "" && (
           <div className="flex items-center gap-1">
             <h2 className="font-semibold text-xl p-1">Category:</h2>
             <Link to="#!">
@@ -68,10 +66,6 @@ function App() {
               </h2>
             </Link>
           </div>
-        ) : (
-          <h2 className="font-semibold text-xl p-3">
-            Login to see/add todo list
-          </h2>
         )}
         {jwtToken !== "" && (
           <div className="flex items-center gap-1">
