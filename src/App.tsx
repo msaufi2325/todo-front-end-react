@@ -24,7 +24,7 @@ function App() {
             </button>
           )}
         </div>
-        <div className="flex items-start gap-1">
+        <div className="flex text-center gap-1">
           <Link to="/">
             <h1 className="font-bold text-2xl p-3">
               <span className="bg-blue-300 px-1 rounded-md hover:bg-blue-500">
@@ -32,67 +32,73 @@ function App() {
               </span>
             </h1>
           </Link>
-          <Link to="#!">
-            <h2 className="font-semibold text-xl p-3">
-              <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
-                Completed Items
-              </span>
-            </h2>
-          </Link>
+          {jwtToken !== "" && (
+            <Link to="#!">
+              <h2 className="font-semibold text-xl p-3">
+                <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
+                  Completed Items
+                </span>
+              </h2>
+            </Link>
+          )}
         </div>
         <hr className="mb-3"></hr>
-        <div className="flex items-center gap-1">
-        <h2 className="font-semibold text-xl p-1">
-            Category:
+        {jwtToken !== "" ? (
+          <div className="flex items-center gap-1">
+            <h2 className="font-semibold text-xl p-1">Category:</h2>
+            <Link to="#!">
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
+                  Work
+                </span>
+              </h2>
+            </Link>
+            <Link to="#!">
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
+                  Home
+                </span>
+              </h2>
+            </Link>
+            <Link to="#!">
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-blue-200 px-1 rounded-md hover:bg-blue-500">
+                  Hobby
+                </span>
+              </h2>
+            </Link>
+          </div>
+        ) : (
+          <h2 className="font-semibold text-xl p-3">
+            Login to see/add todo list
           </h2>
-          <Link to="#!">
-            <h2 className="font-semibold text-xl p-1">
-              <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
-                Work
-              </span>
-            </h2>
-          </Link>
-          <Link to="#!">
-            <h2 className="font-semibold text-xl p-1">
-              <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
-                Home
-              </span>
-            </h2>
-          </Link>
-          <Link to="#!">
-            <h2 className="font-semibold text-xl p-1">
-              <span className="bg-blue-200 px-1 rounded-md hover:bg-blue-500">
-                Hobby
-              </span>
-            </h2>
-          </Link>
-        </div>
-        <div className="flex items-center gap-1">
-          <h2 className="font-semibold text-xl p-1">
-            Priority:
-          </h2>
-          <Link to="#!">
-            <h2 className="font-semibold text-xl p-1">
-              <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
-                Low
-              </span>
-            </h2>
-          </Link>
-          <Link to="#!">
-            <h2 className="font-semibold text-xl p-1">
-              <span className="bg-orange-200 px-1 rounded-md hover:bg-orange-500">
-                Medium
-              </span>
-            </h2>
-          </Link>
-          <Link to="#!">
-            <h2 className="font-semibold text-xl p-1">
-              <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
-                High
-              </span>
-            </h2>
-          </Link>
-        </div>
+        )}
+        {jwtToken !== "" && (
+          <div className="flex items-center gap-1">
+            <h2 className="font-semibold text-xl p-1">Priority:</h2>
+            <Link to="#!">
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
+                  Low
+                </span>
+              </h2>
+            </Link>
+            <Link to="#!">
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-orange-200 px-1 rounded-md hover:bg-orange-500">
+                  Medium
+                </span>
+              </h2>
+            </Link>
+            <Link to="#!">
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
+                  High
+                </span>
+              </h2>
+            </Link>
+          </div>
+        )}
       </div>
     </main>
   );
