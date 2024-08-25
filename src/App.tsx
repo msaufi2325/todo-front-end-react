@@ -5,7 +5,7 @@ function App() {
   const [jwtToken, setJwtToken] = useState<string>("");
 
   return (
-    <main className="container p-3">
+    <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
       <div className="row-auto">
         <div className="col-auto text-end">
           {jwtToken === "" ? (
