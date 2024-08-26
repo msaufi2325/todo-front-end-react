@@ -5,13 +5,25 @@ function Login (){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const payload = {
+      email: email,
+      password: password
+    }
+
+    console.log(payload);
+  }
 
   return (
     <div className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
       <div><h2>Login</h2></div>
       <hr />
 
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={handleSubmit}>
         <Input 
           title="Email"
           type="email"
