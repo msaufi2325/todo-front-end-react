@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function App() {
   const [jwtToken, setJwtToken] = useState<string>("");
@@ -93,6 +93,14 @@ function App() {
             </Link>
           </div>
         )}
+        <div className="col-auto">
+            <Outlet 
+            context={{
+              jwtToken,
+              setJwtToken,
+            }}
+          />
+        </div>
       </div>
     </main>
   );
