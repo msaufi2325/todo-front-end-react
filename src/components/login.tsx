@@ -31,27 +31,29 @@ function Login (){
       <div><h2>Login</h2></div>
       <hr />
 
-      <form onSubmit={handleSubmit}>
-        <Input 
-          title="Email"
-          type="email"
-          className="block w-full mt-1"
-          name="email"
-          placeholder="Email"
-          autoComplete="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <div className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
+        <form onSubmit={handleSubmit}>
+          <Input 
+            title="Email"
+            type="email"
+            className="block w-full mt-1"
+            name="email"
+            placeholder="Email"
+            autoComplete="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <Input 
-          title="Password"
-          type="password"
-          className="block w-full mt-1"
-          name="password"
-          placeholder="Password"
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </ form>
+          <Input 
+            title="Password"
+            type="password"
+            className="block w-full mt-1"
+            name="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </ form>
+      </div>
     </div>
   )
 }
