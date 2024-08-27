@@ -1,11 +1,10 @@
 import { useState } from "react";
 import Input from "./form/Input";
+import { Link } from "react-router-dom";
 
 function Login (){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,6 +19,15 @@ function Login (){
 
   return (
     <div className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
+       <div className="flex text-center gap-1">
+          <Link to="/">
+            <h1 className="font-bold text-2xl p-3">
+              <span className="bg-blue-300 px-1 rounded-md hover:bg-blue-500">
+                My Todo
+              </span>
+            </h1>
+          </Link>
+        </div>
       <div><h2>Login</h2></div>
       <hr />
 
