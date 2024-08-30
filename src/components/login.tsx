@@ -1,61 +1,83 @@
-import { useState } from "react";
-import Input from "./form/Input";
+import React, { useState } from "react";
+import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import MyTodo from "./MyTodo";
 
-function Login (){
+function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     const payload = {
       email: email,
-      password: password
-    }
+      password: password,
+    };
 
     console.log(payload);
-  }
+  };
 
   return (
-    <div className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
-       <div className="flex text-center gap-1">
-          <Link to="/">
-            <h1 className="font-bold text-2xl p-3">
-              <span className="bg-blue-300 px-1 rounded-md hover:bg-blue-500">
-                My Todo
-              </span>
-            </h1>
-          </Link>
-        </div>
-      <div><h2>Login</h2></div>
-      <hr />
-
-      <div className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
-        <form onSubmit={handleSubmit}>
-          <Input 
-            title="Email"
-            type="email"
-            className="block w-full mt-1"
+    <Container maxWidth="xs">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          mt: 8,
+        }}
+      >
+        <MyTodo />
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
             name="email"
-            placeholder="Email"
             autoComplete="email"
+            autoFocus
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
-          <Input 
-            title="Password"
-            type="password"
-            className="block w-full mt-1"
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             name="password"
-            placeholder="Password"
+            label="Password"
+            type="password"
+            id="password"
             autoComplete="current-password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </ form>
-      </div>
-    </div>
-  )
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login
+          </Button>
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <Button
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 1 }}
+            >
+              Register
+            </Button>
+          </Link>
+        </Box>
+      </Box>
+    </Container>
+  );
 }
 
 export default Login;

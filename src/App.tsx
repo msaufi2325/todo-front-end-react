@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import MyTodo from "./components/MyTodo";
 
 function App() {
   const [jwtToken, setJwtToken] = useState<string>("");
@@ -23,13 +24,7 @@ function App() {
           )}
         </div>
         <div className="flex text-center gap-1">
-          <Link to="/">
-            <h1 className="font-bold text-2xl p-3">
-              <span className="bg-blue-300 px-1 rounded-md hover:bg-blue-500">
-                My Todo
-              </span>
-            </h1>
-          </Link>
+          <MyTodo />
           {jwtToken !== "" && (
             <Link to="#!">
               <h2 className="font-semibold text-xl p-3">
