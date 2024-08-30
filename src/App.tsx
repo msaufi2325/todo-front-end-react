@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import MyTodo from "./components/MyTodo";
+import { useJwtStore } from "./store";
 
 function App() {
-  const [jwtToken, setJwtToken] = useState<string>("");
+  const jwtToken = useJwtStore((state) => state.jwtToken);
+  const delJwtToken = useJwtStore((state) => state.delJwtToken);
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -17,7 +18,7 @@ function App() {
             </Link>
           ) : (
             <a href="#!"
-              onClick={() => setJwtToken("")}
+              onClick={() => delJwtToken()}
             >
               <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">Logout</span>
             </a>

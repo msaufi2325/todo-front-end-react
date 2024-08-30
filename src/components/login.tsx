@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyTodo from "./MyTodo";
+import { useJwtStore } from "../store";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const setJwtToken = useJwtStore((state) => state.setJwtToken);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,6 +21,8 @@ function Login() {
     };
 
     console.log(payload);
+    setJwtToken();
+    navigate("/");
   };
 
   return (
