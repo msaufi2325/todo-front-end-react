@@ -11,16 +11,27 @@ function App() {
       <div className="row-auto">
         <div className="col-auto text-end">
           {jwtToken === "" ? (
-            <Link to="/login"
-              // onClick={() => setJwtToken("jwtToken")}
-            >
-              <span className="bg-green-500 hover:bg-green-800 text-white p-1 rounded-md">Login</span>
-            </Link>
+            <div>
+              <Link
+                className="px-1"
+                to="/login"
+                // onClick={() => setJwtToken("jwtToken")}
+              >
+                <span className="bg-green-500 hover:bg-green-800 text-white p-1 rounded-md">
+                  Login
+                </span>
+              </Link>
+              <Link to="/register" className="px-1">
+                <span className="bg-blue-500 hover:bg-blue-800 text-white p-1 rounded-md">
+                  Register
+                </span>
+              </Link>
+            </div>
           ) : (
-            <a href="#!"
-              onClick={() => delJwtToken()}
-            >
-              <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">Logout</span>
+            <a href="#!" onClick={() => delJwtToken()}>
+              <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">
+                Logout
+              </span>
             </a>
           )}
         </div>

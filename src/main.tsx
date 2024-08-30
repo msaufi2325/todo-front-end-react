@@ -6,6 +6,7 @@ import './index.css'
 
 import ErrorPage from './components/ErrorPage.tsx'
 import Login from './components/login.tsx'
+import Register from './components/register.tsx'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
 ]);
 
 createRoot(document.getElementById('root')!).render(

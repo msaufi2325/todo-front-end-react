@@ -1,27 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MyTodo from "./MyTodo";
-import { useJwtStore } from "../store";
 
-function Login() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
 
-  const setJwtToken = useJwtStore((state) => state.setJwtToken);
+const Register: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const payload = {
-      email: email,
-      password: password,
-    };
-
-    console.log(payload);
-    setJwtToken();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Add your registration logic here
     navigate("/");
   };
 
@@ -37,9 +29,21 @@ function Login() {
       >
         <MyTodo />
         <Typography component="h1" variant="h5">
-          Login
+          Register
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <TextField
             margin="normal"
             required
@@ -70,12 +74,12 @@ function Login() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Login
+            Register
           </Button>
         </Box>
       </Box>
     </Container>
   );
-}
+};
 
-export default Login;
+export default Register;
