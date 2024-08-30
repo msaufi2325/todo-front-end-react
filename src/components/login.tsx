@@ -8,7 +8,7 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const setJwtToken = useJwtStore((state) => state.setJwtToken);
+  const setLoginJwtToken = useJwtStore((state) => state.setJwtToken);
 
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Login() {
     };
 
     console.log(payload);
-    setJwtToken();
+    setLoginJwtToken();
     navigate("/");
   };
 

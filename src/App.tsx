@@ -4,7 +4,7 @@ import { useJwtStore } from "./store";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
-  const delJwtToken = useJwtStore((state) => state.delJwtToken);
+  const setLogoutJwtToken = useJwtStore((state) => state.delJwtToken);
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -28,7 +28,7 @@ function App() {
               </Link>
             </div>
           ) : (
-            <a href="#!" onClick={() => delJwtToken()}>
+            <a href="#!" onClick={() => setLogoutJwtToken()}>
               <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">
                 Logout
               </span>
