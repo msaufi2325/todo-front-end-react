@@ -8,7 +8,7 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const setLoginJwtToken = useJwtStore((state) => state.setJwtToken);
+  const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
 
   const navigate = useNavigate();
 

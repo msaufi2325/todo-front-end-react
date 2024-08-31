@@ -4,7 +4,7 @@ import { useJwtStore } from "./store";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
-  const setLogoutJwtToken = useJwtStore((state) => state.delJwtToken);
+  const setLogoutJwtToken = useJwtStore((state) => state.setLogoutJwtToken);
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
