@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
 
 interface SpanColorProps extends React.HTMLAttributes<HTMLSpanElement> {
-  text: string;
   colorType: string;
 }
 
@@ -22,12 +21,12 @@ const getColorClass = (colorType: string) => {
   return "bg-gray-200 px-1 rounded-md hover:bg-gray-500";
 };
 
-const SpanColor = forwardRef<HTMLSpanElement, SpanColorProps>(({ text, colorType }, ref) => {
+const SpanColor = forwardRef<HTMLSpanElement, SpanColorProps>(({ colorType }, ref) => {
   const colorClass = getColorClass(colorType);
 
   return (
     <span ref={ref} className={colorClass}>
-      {text}
+      {colorType}
     </span>
   );
 });

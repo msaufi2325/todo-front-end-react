@@ -22,10 +22,10 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
         <div className="row-span-1 flex flex-col">
           <p className="text-xs">
-            <SpanColor text={todo.category} colorType={todo.category}/>
+            <SpanColor colorType={todo.category}/>
           </p>
           <p className="text-xs">
-            <SpanColor text={todo.priority} colorType={todo.priority}/>
+            <SpanColor colorType={todo.priority}/>
           </p>
         </div>
         <span className={todo.isCompleted ? "line-through text-gray-400" : ""}>
