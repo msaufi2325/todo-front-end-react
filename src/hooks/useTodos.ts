@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { Todo } from "../types/todo";
 import { dummyTodoList } from "../assets/data/todoList";
 import { useJwtStore } from ".././store";
-import { useNavigate } from "react-router-dom";
 
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
-  const navigate = useNavigate();
   
   const [todos, setTodos] = useState<Todo[]>([]);
 
@@ -15,7 +13,7 @@ export default function useTodos() {
       return;
     }
     setTodos(dummyTodoList);
-  }, [jwtToken, navigate]);
+  }, [jwtToken]);
 
   function setCompleted(id: number, isCompleted: boolean) {
     setTodos((prevTodos) =>
