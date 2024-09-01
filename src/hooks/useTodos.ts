@@ -26,8 +26,17 @@ export default function useTodos() {
     );
   }
 
+  function setCompleted(id: number) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  }
+
   return {
     todos,
     setCheckCompleted,
+    setCompleted,
   }
 }

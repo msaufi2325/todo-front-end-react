@@ -9,7 +9,7 @@ interface TodoItemProps {
 
 export default function TodoItem({ todo, onCheckCompletedChange, onCompletedChange }: TodoItemProps) {
   return (
-    <div className="flex item-center gap-1">
+    <div className="flex item-center gap-1 px-2">
       <input
         type="checkbox"
         checked={todo.isCheckedCompleted}
