@@ -5,6 +5,7 @@ import TodoList from "./components/TodoList";
 import useTodos from "./hooks/useTodos";
 import TodoRemove from "./components/TodoRemove";
 import DeletedTodo from "./components/DeletedTodo";
+import SpanColor from "./components/SpanColor";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -39,9 +40,7 @@ function App() {
         </div>
         <div className="flex gap-1">
           <MyTodo />
-          {jwtToken !== "" && (
-            <DeletedTodo />
-          )}
+          {jwtToken !== "" && <DeletedTodo />}
         </div>
         {jwtToken !== "" && (
           <TodoRemove todos={todos} deleteAllCompleted={() => {}} />
@@ -52,23 +51,17 @@ function App() {
             <h2 className="font-semibold text-xl p-1">Category:</h2>
             <Link to="#!">
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-purple-200 px-1 rounded-md hover:bg-purple-500">
-                  Work
-                </span>
+                <SpanColor text="Work" colorType="work" />
               </h2>
             </Link>
             <Link to="#!">
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
-                  Home
-                </span>
+                <SpanColor text="Home" colorType="home" />
               </h2>
             </Link>
             <Link to="#!">
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-blue-200 px-1 rounded-md hover:bg-blue-500">
-                  Hobby
-                </span>
+                <SpanColor text="Hobby" colorType="hobby" />
               </h2>
             </Link>
           </div>
@@ -86,23 +79,17 @@ function App() {
               <h2 className="font-semibold text-xl p-1">Priority:</h2>
               <Link to="#!">
                 <h2 className="font-semibold text-xl p-1">
-                  <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
-                    Low
-                  </span>
+                  <SpanColor text="Low" colorType="low" />
                 </h2>
               </Link>
               <Link to="#!">
                 <h2 className="font-semibold text-xl p-1">
-                  <span className="bg-orange-200 px-1 rounded-md hover:bg-orange-500">
-                    Medium
-                  </span>
+                  <SpanColor text="Medium" colorType="medium" />
                 </h2>
               </Link>
               <Link to="#!">
                 <h2 className="font-semibold text-xl p-1">
-                  <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
-                    High
-                  </span>
+                  <SpanColor text="High" colorType="high" />
                 </h2>
               </Link>
             </div>
