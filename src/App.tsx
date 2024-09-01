@@ -48,7 +48,7 @@ function App() {
           )}
         </div>
         <hr className="mb-3"></hr>
-        {jwtToken !== "" && (
+        {jwtToken !== "" ? (
           <div className="flex items-center gap-1">
             <h2 className="font-semibold text-xl p-1">Category:</h2>
             <Link to="#!">
@@ -72,6 +72,13 @@ function App() {
                 </span>
               </h2>
             </Link>
+          </div>
+        ) : (
+          <div>
+            <h2>
+              Please login to see your todo list and add new todo items. <br />
+              Or register if you don't have an account.
+            </h2>
           </div>
         )}
         {jwtToken !== "" && (
