@@ -12,6 +12,14 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
 
   return (
     <div className="flex item-center gap-1 px-2">
+      <div className="row-span-1 flex flex-col w-16 text-end">
+        <p className="text-xs">
+          <SpanColor colorType={todo.category} />
+        </p>
+        <p className="text-xs">
+          <SpanColor colorType={todo.priority} />
+        </p>
+      </div>
       <input
         type="checkbox"
         checked={todo.isCompleted}
@@ -19,15 +27,8 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
         className="scale-125"
         title="Check item as completed"
       />
+
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
-        <div className="row-span-1 flex flex-col">
-          <p className="text-xs">
-            <SpanColor colorType={todo.category}/>
-          </p>
-          <p className="text-xs">
-            <SpanColor colorType={todo.priority}/>
-          </p>
-        </div>
         <span className={todo.isCompleted ? "line-through text-gray-400" : ""}>
           {todo.title}
         </span>
