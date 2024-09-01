@@ -3,12 +3,13 @@ import MyTodo from "./components/MyTodo";
 import { useJwtStore } from "./store";
 import TodoList from "./components/TodoList";
 import useTodos from "./hooks/useTodos";
+import TodoRemove from "./components/TodoRemove";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
   const setLogoutJwtToken = useJwtStore((state) => state.setLogoutJwtToken);
 
-  const { todos, setCheckCompleted, setCompleted } = useTodos();
+  const { todos, setCompleted, setRemoved } = useTodos();
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -35,18 +36,21 @@ function App() {
             </a>
           )}
         </div>
-        <div className="flex text-center gap-1">
+        <div className="flex gap-1">
           <MyTodo />
           {jwtToken !== "" && (
             <Link to="#!">
               <h2 className="font-semibold text-xl p-3">
                 <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
-                  Completed Items
+                  Deleted Items
                 </span>
               </h2>
             </Link>
           )}
         </div>
+        {jwtToken !== "" && (
+          <TodoRemove todos={todos} deleteAllCompleted={() => {}} />
+        )}
         <hr className="mb-3"></hr>
         {jwtToken !== "" ? (
           <div className="flex items-center gap-1">
@@ -109,8 +113,8 @@ function App() {
             </div>
             <TodoList
               todos={todos}
-              onCheckCompletedChange={setCheckCompleted}
               onCompletedChange={setCompleted}
+              onRemovedChange={setRemoved}
             />
           </>
         )}

@@ -4,8 +4,8 @@ export interface Todo {
   description: string;
   category: string;
   priority: keyof priority;
-  isCheckedCompleted: boolean;
   isCompleted: boolean;
+  isRemoved: boolean;
   createdAt: string;
   updatedAt: string;
 }

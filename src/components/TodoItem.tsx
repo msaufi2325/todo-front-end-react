@@ -3,29 +3,34 @@ import { Todo } from "../types/todo";
 
 interface TodoItemProps {
   todo: Todo;
-  onCheckCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
-  onCompletedChange: (id: number) => void;
+  onCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
+  onRemovedChange: (id: number) => void;
 }
 
-export default function TodoItem({ todo, onCheckCompletedChange, onCompletedChange }: TodoItemProps) {
+export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: TodoItemProps) {
   return (
     <div className="flex item-center gap-1 px-2">
       <input
         type="checkbox"
-        checked={todo.isCheckedCompleted}
-        onChange={(e) => onCheckCompletedChange(todo.id, e.target.checked)}
+        checked={todo.isCompleted}
+        onChange={(e) => onCompletedChange(todo.id, e.target.checked)}
         className="scale-125"
+        title="Check item as completed"
       />
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
         <span
           className={
-            todo.isCheckedCompleted ? "line-through text-gray-400" : ""
+            todo.isCompleted ? "line-through text-gray-400" : ""
           }
         >
           {todo.title}
         </span>
       </label>
-      <button onClick={() => onCompletedChange(todo.id)} className="p-2">
+      <button
+        onClick={() => onRemovedChange(todo.id)}
+        className="p-2"
+        title="Move item to deleted items"
+      >
         <Trash2 size={20} className="text-gray-500" />
       </button>
     </div>

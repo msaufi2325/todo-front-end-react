@@ -3,11 +3,11 @@ import TodoItem from "./TodoItem";
 
 interface TodoItemProps {
   todos: Todo[];
-  onCheckCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
-  onCompletedChange: (id: number) => void;
+  onCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
+  onRemovedChange: (id: number) => void;
 }
 
-export default function TodoList({ todos, onCheckCompletedChange, onCompletedChange }: TodoItemProps) {
+export default function TodoList({ todos, onCompletedChange, onRemovedChange }: TodoItemProps) {
   return (
     <>
       <div className="space-y-2">
@@ -15,8 +15,8 @@ export default function TodoList({ todos, onCheckCompletedChange, onCompletedCha
           <TodoItem
             key={todo.id}
             todo={todo}
-            onCheckCompletedChange={onCheckCompletedChange}
             onCompletedChange={onCompletedChange}
+            onRemovedChange={onRemovedChange}
           />
         ))}
       </div>

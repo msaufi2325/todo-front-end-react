@@ -4,7 +4,6 @@ import { dummyTodoList } from "../assets/data/todoList";
 import { useJwtStore } from ".././store";
 import { useNavigate } from "react-router-dom";
 
-
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
   const navigate = useNavigate();
@@ -18,25 +17,25 @@ export default function useTodos() {
     setTodos(dummyTodoList);
   }, [jwtToken, navigate]);
 
-  function setCheckCompleted(id: number, isCheckedCompleted: boolean) {
+  function setCompleted(id: number, isCompleted: boolean) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isCheckedCompleted } : todo
+        todo.id === id ? { ...todo, isCompleted } : todo
       )
     );
   }
 
-  function setCompleted(id: number) {
+  function setRemoved(id: number) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+        todo.id === id ? { ...todo, isRemoved: !todo.isRemoved } : todo
       )
     );
   }
 
   return {
     todos,
-    setCheckCompleted,
     setCompleted,
+    setRemoved,
   }
 }
