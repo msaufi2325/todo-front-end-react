@@ -52,14 +52,14 @@ function App() {
             <h2 className="font-semibold text-xl p-1">Category:</h2>
             <Link to="#!">
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
+                <span className="bg-purple-200 px-1 rounded-md hover:bg-purple-500">
                   Work
                 </span>
               </h2>
             </Link>
             <Link to="#!">
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
+                <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
                   Home
                 </span>
               </h2>
