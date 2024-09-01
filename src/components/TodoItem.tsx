@@ -8,6 +8,7 @@ interface TodoItemProps {
 }
 
 export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: TodoItemProps) {
+
   return (
     <div className="flex item-center gap-1 px-2">
       <input
@@ -18,11 +19,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
         title="Check item as completed"
       />
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
-        <span
-          className={
-            todo.isCompleted ? "line-through text-gray-400" : ""
-          }
-        >
+        <span className={todo.isCompleted ? "line-through text-gray-400" : ""}>
           {todo.title}
         </span>
       </label>
