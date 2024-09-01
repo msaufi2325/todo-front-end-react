@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MyTodo from "./MyTodo";
+import { useJwtStore } from '../store';
+import Input from './form/Input';
 
 
 const Register: React.FC = () => {
@@ -11,74 +12,105 @@ const Register: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
+
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Add your registration logic here
+    const payload = {
+      username: username,
+      email: email,
+      password: password
+    };
+    console.log(payload);
+    setLoginJwtToken();
     navigate("/");
   };
 
   return (
-    <Container maxWidth="xs">
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          mt: 8,
-        }}
-      >
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <MyTodo />
-        <Typography component="h1" variant="h5">
+        <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Register
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Register
-          </Button>
-        </Box>
-      </Box>
-    </Container>
+        </h2>
+      </div>
+
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form
+          className="space-y-6"
+          action="#"
+          method="POST"
+          onSubmit={handleSubmit}
+        >
+          <div>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Username
+            </label>
+            <div className="mt-2">
+              <Input
+                name="username"
+                type="username"
+                autoComplete="username"
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Email address
+            </label>
+            <div className="mt-2">
+              <Input
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Password
+              </label>
+            </div>
+            <div className="mt-2">
+              <Input
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
