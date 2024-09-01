@@ -3,8 +3,15 @@ export interface Todo {
   title: string;
   description: string;
   category: string;
-  priority: string;
+  priority: keyof priority;
+  isCheckedCompleted: boolean;
   isCompleted: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+interface priority {
+  low: string;
+  medium: string;
+  high: string;
 }
