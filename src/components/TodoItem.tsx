@@ -4,10 +4,10 @@ import { Todo } from "../types/todo";
 interface TodoItemProps {
   todo: Todo;
   onCheckCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
-  onRemoveTodo: (id: number) => void;
+  onCompletedChange: (id: number) => void;
 }
 
-export default function TodoItem({ todo, onCheckCompletedChange, onRemoveTodo }: TodoItemProps) {
+export default function TodoItem({ todo, onCheckCompletedChange, onCompletedChange }: TodoItemProps) {
   return (
     <div className="flex item-center gap-1">
       <input
@@ -25,7 +25,7 @@ export default function TodoItem({ todo, onCheckCompletedChange, onRemoveTodo }:
           {todo.title}
         </span>
       </label>
-      <button onClick={() => onRemoveTodo(todo.id)} className="p-2">
+      <button onClick={() => onCompletedChange(todo.id)} className="p-2">
         <Trash2 size={20} className="text-gray-500" />
       </button>
     </div>
