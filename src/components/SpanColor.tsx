@@ -6,19 +6,19 @@ interface SpanColorProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const getColorClass = (colorType: string) => {
   if (colorType === "work") {
-    return "bg-purple-200 px-1 rounded-md hover:bg-purple-500";
+    return "bg-purple-200 px-1 rounded-md";
   } else if (colorType === "home") {
-    return "bg-green-200 px-1 rounded-md hover:bg-green-500";
+    return "bg-green-200 px-1 rounded-md";
   } else if (colorType === "hobby") {
-    return "bg-blue-200 px-1 rounded-md hover:bg-blue-500";
+    return "bg-blue-200 px-1 rounded-md";
   } else if (colorType === "low") {
-    return "bg-yellow-200 px-1 rounded-md hover:bg-yellow-500";
+    return "bg-yellow-200 px-1 rounded-md";
   } else if (colorType === "medium") {
-    return "bg-orange-200 px-1 rounded-md hover:bg-orange-500";
+    return "bg-orange-200 px-1 rounded-md";
   } else if (colorType === "high") {
-    return "bg-red-200 px-1 rounded-md hover:bg-red-500";
+    return "bg-red-200 px-1 rounded-md";
   }
-  return "bg-gray-200 px-1 rounded-md hover:bg-gray-500";
+  return "bg-gray-200 px-1 rounded-md";
 };
 
 const SpanColor = forwardRef<HTMLSpanElement, SpanColorProps>(({ colorType }, ref) => {
