@@ -21,7 +21,7 @@ export default function TodoRemove({
           onClick={deleteAllCompleted}
           className="bg-red-500 text-white px-1 rounded-md hover:bg-red-600"
         >
-          Delete checked
+          Delete checked items
         </button>
       )}
     </div>

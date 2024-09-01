@@ -4,6 +4,7 @@ import { useJwtStore } from "./store";
 import TodoList from "./components/TodoList";
 import useTodos from "./hooks/useTodos";
 import TodoRemove from "./components/TodoRemove";
+import DeletedTodo from "./components/DeletedTodo";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -39,13 +40,7 @@ function App() {
         <div className="flex gap-1">
           <MyTodo />
           {jwtToken !== "" && (
-            <Link to="#!">
-              <h2 className="font-semibold text-xl p-3">
-                <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
-                  Deleted Items
-                </span>
-              </h2>
-            </Link>
+            <DeletedTodo />
           )}
         </div>
         {jwtToken !== "" && (
