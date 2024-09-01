@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 
-
 const Input = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
   return (
     <label className="block">
