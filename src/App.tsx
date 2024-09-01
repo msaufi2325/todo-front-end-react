@@ -15,7 +15,6 @@ function App() {
               <Link
                 className="px-1"
                 to="/login"
-                // onClick={() => setJwtToken("jwtToken")}
               >
                 <span className="bg-green-500 hover:bg-green-800 text-white p-1 rounded-md">
                   Login
