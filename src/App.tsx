@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import MyTodo from "./components/MyTodo";
-import { useJwtStore } from "./store";
+import { useJwtStore, useShowDeletedStore } from "./store";
 import TodoList from "./components/TodoList";
 import useTodos from "./hooks/useTodos";
 import TodoRemove from "./components/TodoRemove";
@@ -15,7 +15,11 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
-  const filteredTodos = todos.filter(todo => {
+  const showDeleted = useShowDeletedStore((state) => state.showDeleted);
+
+  const todosDisplay = todos.filter(todo => todo.isRemoved === showDeleted);
+
+  const filteredTodos = todosDisplay.filter(todo => {
     return (
       (selectedCategory ? todo.category === selectedCategory : true) &&
       (selectedPriority ? todo.priority === selectedPriority : true)
@@ -25,6 +29,16 @@ function App() {
   const resetFilter = () => {
     setSelectedCategory(null);
     setSelectedPriority(null);
+  };
+
+  const resetTodos = () => {
+    resetFilter();
+    useShowDeletedStore.getState().setShowDeleted(false)
+  }
+
+  const resetDeleted = () => {
+    resetFilter();
+    useShowDeletedStore.getState().setShowDeleted(true)
   };
 
   return (
@@ -53,11 +67,11 @@ function App() {
           )}
         </div>
         <div className="flex gap-1">
-          <Link to="/" onClick={() => resetFilter()}>
+          <Link to="/" onClick={() => resetTodos()}>
             <MyTodo />
           </Link>
           
-          {jwtToken !== "" && <DeletedTodo />}
+          {jwtToken !== "" && <Link to="#!" onClick={() => resetDeleted()}><DeletedTodo /></Link>}
         </div>
         {jwtToken !== "" && (
           <TodoRemove todos={todos} deleteAllCompleted={() => {}} />

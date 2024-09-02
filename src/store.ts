@@ -15,3 +15,15 @@ export const useJwtStore = create<jwtStore>((set) => ({
     set((state) => ({ jwtToken: state.jwtToken = "" }));
   },
 }));
+
+type showDeletedStore = {
+  showDeleted: boolean;
+  setShowDeleted: (value: boolean) => void;
+};
+
+export const useShowDeletedStore = create<showDeletedStore>((set) => ({
+  showDeleted: false,
+  setShowDeleted: (value) => {
+    set((state) => ({ showDeleted: state.showDeleted = value }));
+  },
+}));
