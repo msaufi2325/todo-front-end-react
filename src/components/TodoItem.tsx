@@ -1,6 +1,7 @@
 import { Trash2 } from "lucide-react";
 import { Todo } from "../types/todo";
 import SpanColor from "./SpanColor";
+import { useShowDeletedStore } from "../store";
 
 interface TodoItemProps {
   todo: Todo;
@@ -9,16 +10,22 @@ interface TodoItemProps {
 }
 
 export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: TodoItemProps) {
+  const showDeleted = useShowDeletedStore((state) => state.showDeleted);
+
 
   return (
     <div className="flex item-center gap-1 px-2">
-      <input
+      {showDeleted ? (<input
+        type="checkbox"
+        className="scale-125"
+      />): (<input
         type="checkbox"
         checked={todo.isCompleted}
         onChange={(e) => onCompletedChange(todo.id, e.target.checked)}
         className="scale-125"
         title="Check item as completed"
-      />
+      />)}
+      
       <div className="row-span-1 flex flex-col w-12 text-end pt-1">
         <p className="text-xs">
           <SpanColor colorType={todo.category} />

@@ -11,7 +11,8 @@ export default function TodoRemove({
   todos,
   deleteAllCompleted,
 }: TodoRemoveProps) {
-  const completedTodos = todos.filter((todo) => todo.isCompleted);
+  const todosDisplay = todos.filter((todo) => !todo.isRemoved);
+  const completedTodos = todosDisplay.filter((todo) => todo.isCompleted);
   
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
 
@@ -23,7 +24,7 @@ export default function TodoRemove({
       ) : (
         <div>
           <p className="space-y-2">
-            {completedTodos.length}/{todos.length} todos completed
+            {completedTodos.length}/{todosDisplay.length} todos completed
           </p>
           {completedTodos.length > 0 && (
             <button
