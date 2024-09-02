@@ -12,20 +12,20 @@ interface TodoItemProps {
 export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: TodoItemProps) {
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
 
-
   return (
     <div className="flex item-center gap-1 px-2">
-      {showDeleted ? (<input
-        type="checkbox"
-        className="scale-125"
-      />): (<input
-        type="checkbox"
-        checked={todo.isCompleted}
-        onChange={(e) => onCompletedChange(todo.id, e.target.checked)}
-        className="scale-125"
-        title="Check item as completed"
-      />)}
-      
+      {showDeleted ? (
+        <></>
+      ) : (
+        <input
+          type="checkbox"
+          checked={todo.isCompleted}
+          onChange={(e) => onCompletedChange(todo.id, e.target.checked)}
+          className="scale-125"
+          title="Check item as completed"
+        />
+      )}
+
       <div className="row-span-1 flex flex-col w-12 text-end pt-1">
         <p className="text-xs">
           <SpanColor colorType={todo.category} />
@@ -42,7 +42,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
       <button
         onClick={() => onRemovedChange(todo.id)}
         className="p-2"
-        title="Move item to deleted items"
+        title={showDeleted ? "Permanently remove todo" : "Move item to deleted todo"}
       >
         <Trash2 size={20} className="text-gray-500" />
       </button>
