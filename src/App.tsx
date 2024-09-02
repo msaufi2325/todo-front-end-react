@@ -5,12 +5,27 @@ import TodoList from "./components/TodoList";
 import useTodos from "./hooks/useTodos";
 import TodoRemove from "./components/TodoRemove";
 import DeletedTodo from "./components/DeletedTodo";
+import { useState } from "react";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
   const setLogoutJwtToken = useJwtStore((state) => state.setLogoutJwtToken);
 
   const { todos, setCompleted, setRemoved } = useTodos();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
+
+  const filteredTodos = todos.filter(todo => {
+    return (
+      (selectedCategory ? todo.category === selectedCategory : true) &&
+      (selectedPriority ? todo.priority === selectedPriority : true)
+    );
+  });
+
+  const resetFilter = () => {
+    setSelectedCategory(null);
+    setSelectedPriority(null);
+  };
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -38,7 +53,10 @@ function App() {
           )}
         </div>
         <div className="flex gap-1">
-          <MyTodo />
+          <Link to="/" onClick={() => resetFilter()}>
+            <MyTodo />
+          </Link>
+          
           {jwtToken !== "" && <DeletedTodo />}
         </div>
         {jwtToken !== "" && (
@@ -48,21 +66,21 @@ function App() {
         {jwtToken !== "" ? (
           <div className="flex items-center gap-1">
             <h2 className="font-semibold text-xl p-1">Category:</h2>
-            <Link to="#!">
+            <Link to="#!" onClick={() => setSelectedCategory('work')}>
               <h2 className="font-semibold text-xl p-1">
                 <span className="bg-purple-200 px-1 rounded-md hover:bg-purple-500">
                   Work
                 </span>
               </h2>
             </Link>
-            <Link to="#!">
+            <Link to="#!" onClick={() => setSelectedCategory('home')}>
               <h2 className="font-semibold text-xl p-1">
                 <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
                   Home
                 </span>
               </h2>
             </Link>
-            <Link to="#!">
+            <Link to="#!" onClick={() => setSelectedCategory('hobby')}>
               <h2 className="font-semibold text-xl p-1">
                 <span className="bg-blue-200 px-1 rounded-md hover:bg-blue-500">
                   Hobby
@@ -82,21 +100,21 @@ function App() {
           <>
             <div className="flex items-center gap-1">
               <h2 className="font-semibold text-xl p-1">Priority:</h2>
-              <Link to="#!">
+              <Link to="#!" onClick={() => setSelectedPriority('low')}>
                 <h2 className="font-semibold text-xl p-1">
                   <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
                     Low
                   </span>
                 </h2>
               </Link>
-              <Link to="#!">
+              <Link to="#!" onClick={() => setSelectedPriority('medium')}>
                 <h2 className="font-semibold text-xl p-1">
                   <span className="bg-orange-200 px-1 rounded-md hover:bg-purple-500">
                     Medium
                   </span>
                 </h2>
               </Link>
-              <Link to="#!">
+              <Link to="#!" onClick={() => setSelectedPriority('high')}>
                 <h2 className="font-semibold text-xl p-1">
                   <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
                     High
@@ -105,7 +123,7 @@ function App() {
               </Link>
             </div>
             <TodoList
-              todos={todos}
+              todos={filteredTodos}
               onCompletedChange={setCompleted}
               onRemovedChange={setRemoved}
             />
