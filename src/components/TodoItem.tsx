@@ -42,7 +42,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
       <button
         onClick={() => onRemovedChange(todo.id)}
         className="p-2"
-        title={showDeleted ? "Permanently remove todo" : "Move item to deleted todo"}
+        title={showDeleted ? "Permanently delete todo" : "Delete todo"}
       >
         <Trash2 size={20} className="text-gray-500" />
       </button>
