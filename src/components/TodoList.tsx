@@ -5,9 +5,10 @@ interface TodoItemProps {
   todos: Todo[];
   onCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
   onRemovedChange: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-export default function TodoList({ todos, onCompletedChange, onRemovedChange }: TodoItemProps) {
+export default function TodoList({ todos, onCompletedChange, onRemovedChange, onDelete }: TodoItemProps) {
   return (
     <>
       <div className="space-y-2">
@@ -17,6 +18,7 @@ export default function TodoList({ todos, onCompletedChange, onRemovedChange }: 
             todo={todo}
             onCompletedChange={onCompletedChange}
             onRemovedChange={onRemovedChange}
+            onDelete={onDelete}
           />
         ))}
       </div>

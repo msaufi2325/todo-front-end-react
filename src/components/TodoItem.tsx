@@ -7,9 +7,10 @@ interface TodoItemProps {
   todo: Todo;
   onCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
   onRemovedChange: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: TodoItemProps) {
+export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onDelete }: TodoItemProps) {
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
 
   return (
@@ -50,6 +51,15 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
           <Trash2 size={20} className="text-gray-500" />
         )}
       </button>
+      {showDeleted && (
+        <button
+          onClick={() => onDelete(todo.id)}
+          className="p-2"
+          title="Delete todo permanently"
+        >
+          <Trash2 size={20} className="text-gray-500" />
+        </button>
+      )}
     </div>
   );
 }

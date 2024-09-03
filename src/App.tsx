@@ -11,7 +11,7 @@ function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
   const setLogoutJwtToken = useJwtStore((state) => state.setLogoutJwtToken);
 
-  const { todos, setCompleted, setRemoved, deleteAllCompleted } = useTodos();
+  const { todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -144,6 +144,7 @@ function App() {
               todos={filteredTodos}
               onCompletedChange={setCompleted}
               onRemovedChange={setRemoved}
+              onDelete={deleteTodo}
             />
           </>
         )}
