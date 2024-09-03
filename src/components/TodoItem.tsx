@@ -2,6 +2,7 @@ import { Trash2, Undo2 } from "lucide-react";
 import { Todo } from "../types/todo";
 import SpanColor from "./SpanColor";
 import { useShowDeletedStore } from "../store";
+import TodoModal from "./TodoModal";
 
 interface TodoItemProps {
   todo: Todo;
@@ -36,9 +37,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onD
         </p>
       </div>
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
-        <span className={todo.isCompleted ? "line-through text-gray-400" : ""}>
-          {todo.title}
-        </span>
+        <TodoModal todo={todo} />
       </label>
       <button
         onClick={() => onRemovedChange(todo.id)}
