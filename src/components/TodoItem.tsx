@@ -9,9 +9,10 @@ interface TodoItemProps {
   onCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
   onRemovedChange: (id: number) => void;
   onDelete: (id: number) => void;
+  onUpdate: (updatedTodo: Todo) => void;
 }
 
-export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onDelete }: TodoItemProps) {
+export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onDelete, onUpdate }: TodoItemProps) {
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
 
   return (
@@ -37,7 +38,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onD
         </p>
       </div>
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
-        <TodoModal todo={todo} />
+        <TodoModal todo={todo} onUpdate={onUpdate} />
       </label>
       <button
         onClick={() => onRemovedChange(todo.id)}
