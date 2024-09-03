@@ -19,10 +19,10 @@ export default function TodoRemove({
   return (
     <div className="text-left">
       {showDeleted ? (
-        <p>Deleted Todo</p>
+        <p className="text-xl px-1">Deleted Todo</p>
       ) : (
-        <div>
-          <p className="space-y-2">
+        <div className="flex items-center gap-1">
+          <p className="text-xl px-1">
             {completedTodos.length}/{todos.length} todos completed
           </p>
           {completedTodos.length > 0 && (
