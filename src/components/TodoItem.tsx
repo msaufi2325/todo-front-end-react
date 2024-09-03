@@ -1,4 +1,4 @@
-import { Trash2 } from "lucide-react";
+import { Trash2, Undo2 } from "lucide-react";
 import { Todo } from "../types/todo";
 import SpanColor from "./SpanColor";
 import { useShowDeletedStore } from "../store";
@@ -42,9 +42,13 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange }: T
       <button
         onClick={() => onRemovedChange(todo.id)}
         className="p-2"
-        title={showDeleted ? "Permanently delete todo" : "Delete todo"}
+        title={showDeleted ? "Restore todo" : "Delete todo"}
       >
-        <Trash2 size={20} className="text-gray-500" />
+        {showDeleted ? (
+          <Undo2 size={20} className="text-gray-500" />
+        ) : (
+          <Trash2 size={20} className="text-gray-500" />
+        )}
       </button>
     </div>
   );
