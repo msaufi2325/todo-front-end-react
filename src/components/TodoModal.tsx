@@ -10,7 +10,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
   const [showModal, setShowModal] = React.useState(false);
   const [editedTodo, setEditedTodo] = React.useState(todo);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setEditedTodo({
       ...editedTodo,
@@ -39,28 +39,28 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               <form
                 onSubmit={handleSubmit}
-                className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t"
+                className="flex flex-col p-5 border-b border-solid border-blueGray-200 rounded-t"
               >
-                <label className="text-xl font-semibold">
+                <label className="text-xl font-semibold mb-2">
                   Title:
                   <input
                     type="text"
                     name="title"
                     value={editedTodo.title}
                     onChange={handleInputChange}
+                    className="border border-solid border-blueGray-200 rounded p-2"
                   />
                 </label>
-                <label className="relative p-6 flex-auto">
+                <label className="relative mb-4">
                   Description:
-                  <input
-                    type="text"
+                  <textarea
                     name="description"
                     value={editedTodo.description}
                     onChange={handleInputChange}
-                    className="my-4 text-blueGray-500 text-lg leading-relaxed"
+                    className="border border-solid border-blueGray-200 rounded p-2"
                   />
                 </label>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                <div className="flex items-center justify-end border-t border-solid border-blueGray-200 rounded-b">
                   <button
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
