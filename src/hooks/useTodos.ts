@@ -31,9 +31,18 @@ export default function useTodos() {
     );
   }
 
+  function deleteAllCompleted() {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.isCompleted ? { ...todo, isRemoved: true } : todo
+      )
+    );
+  }
+
   return {
     todos,
     setCompleted,
     setRemoved,
+    deleteAllCompleted,
   }
 }

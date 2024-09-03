@@ -5,7 +5,7 @@ import App from './App.tsx'
 import './index.css'
 
 import ErrorPage from './components/ErrorPage.tsx'
-import Login from './components/login.tsx'
+import Login from './components/Login.tsx'
 import Register from './components/Register.tsx'
 
 const router = createBrowserRouter([

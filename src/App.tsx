@@ -11,7 +11,7 @@ function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
   const setLogoutJwtToken = useJwtStore((state) => state.setLogoutJwtToken);
 
-  const { todos, setCompleted, setRemoved } = useTodos();
+  const { todos, setCompleted, setRemoved, deleteAllCompleted } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -78,7 +78,7 @@ function App() {
           )}
         </div>
         {jwtToken !== "" && (
-          <TodoRemove todos={todos} deleteAllCompleted={() => {}} />
+          <TodoRemove todos={filteredTodos} deleteAllCompleted={deleteAllCompleted} />
         )}
         <hr className="mb-3"></hr>
         {jwtToken !== "" ? (
