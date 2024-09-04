@@ -135,7 +135,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                       setShowModal(false);
                     }}
                   >
-                    Cancel
+                    {showDeleted ? "Close" : "Cancel"}
                   </button>
                   {!showDeleted && (
                     <button
