@@ -45,11 +45,20 @@ export default function useTodos() {
     );
   }
 
+  function onUpdate(updatedTodo: Todo) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === updatedTodo.id ? updatedTodo : todo
+      )
+    );
+  }
+
   return {
     todos,
     setCompleted,
     setRemoved,
     deleteAllCompleted,
     deleteTodo,
+    onUpdate,
   }
 }

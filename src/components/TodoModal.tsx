@@ -42,7 +42,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        {todo.title}
+        {editedTodo.title}
       </button>
       {showModal && (
         <>
