@@ -41,25 +41,26 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                 onSubmit={handleSubmit}
                 className="flex flex-col p-5 border-b border-solid border-blueGray-200 rounded-t"
               >
-                <label className="text-xl font-semibold mb-2">
+                <label className="text-xl font-semibold" htmlFor="name">
                   Title:
-                  <input
+                </label>
+                <input
                     type="text"
                     name="title"
                     value={editedTodo.title}
                     onChange={handleInputChange}
                     className="border border-solid border-blueGray-200 rounded p-2"
                   />
-                </label>
-                <label className="relative mb-4">
+                <label className="relative mt-4" htmlFor="description">
                   Description:
-                  <textarea
+                  
+                </label>
+                <textarea
                     name="description"
                     value={editedTodo.description}
                     onChange={handleInputChange}
                     className="border border-solid border-blueGray-200 rounded p-2"
                   />
-                </label>
                 <div className="flex items-center justify-end border-t border-solid border-blueGray-200 rounded-b">
                   <button
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
