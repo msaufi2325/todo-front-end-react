@@ -10,8 +10,12 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
   const [showModal, setShowModal] = React.useState(false);
   const [editedTodo, setEditedTodo] = React.useState(todo);
 
+  const categoryOptions: Todo["category"][] = ["work", "home", "hobby"]
+
+  const priorityOptions: Todo["priority"][] = ["low", "medium", "high"]
+
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setEditedTodo({
@@ -22,6 +26,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    editedTodo.updatedAt = new Date().toISOString();
     onUpdate(editedTodo);
     setShowModal(false);
   };
@@ -82,6 +87,38 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                     rows={calculateRows(editedTodo.description)}
                   />
                 </form>
+                <div className="flex items-center">
+                <label className="p-1">
+                  Category:
+                  <select
+                    name="category"
+                    value={editedTodo.category}
+                    onChange={handleInputChange}
+                    className="border border-solid border-blueGray-200 rounded ml-1 px-1"
+                  >
+                    {categoryOptions.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="p-1">
+                  Priority:
+                  <select
+                    name="priority"
+                    value={editedTodo.priority}
+                    onChange={handleInputChange}
+                    className="border border-solid border-blueGray-200 rounded ml-1 px-1"
+                  >
+                    {priorityOptions.map((priority) => (
+                      <option key={priority} value={priority}>
+                        {priority}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                </div>
                 <p className="text-sm text-gray-500">
                   Last updated: {formattedDate}
                 </p>
