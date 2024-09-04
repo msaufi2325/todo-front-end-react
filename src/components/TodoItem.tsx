@@ -38,7 +38,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onD
         </p>
       </div>
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
-        <TodoModal todo={todo} onUpdate={onUpdate} />
+        <TodoModal title={todo.title} todo={todo} onUpdate={onUpdate} />
       </label>
       <button
         onClick={() => onRemovedChange(todo.id)}

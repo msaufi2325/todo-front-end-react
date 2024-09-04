@@ -53,6 +53,24 @@ export default function useTodos() {
     );
   }
 
+  function newTodo() {
+    return {
+      id: todos.length + 1,
+      title: "",
+      description: "",
+      category: "work",
+      priority: "medium",
+      isCompleted: false,
+      isRemoved: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  function addTodo (newTodo: Todo) {
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
+  }
+
   return {
     todos,
     setCompleted,
@@ -60,5 +78,7 @@ export default function useTodos() {
     deleteAllCompleted,
     deleteTodo,
     onUpdate,
+    addTodo,
+    newTodo,
   }
 }

@@ -6,12 +6,14 @@ import useTodos from "./hooks/useTodos";
 import TodoRemove from "./components/TodoRemove";
 import DeletedTodo from "./components/DeletedTodo";
 import { useState } from "react";
+import TodoModal from "./components/TodoModal";
+import { Todo } from "./types/todo";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
   const setLogoutJwtToken = useJwtStore((state) => state.setLogoutJwtToken);
 
-  const { todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate } = useTodos();
+  const { todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -40,6 +42,8 @@ function App() {
     resetFilter();
     useShowDeletedStore.getState().setShowDeleted(true)
   };
+
+  const newTodoItem: Todo = newTodo();
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -72,13 +76,30 @@ function App() {
           </Link>
 
           {jwtToken !== "" && (
-            <button onClick={resetDeleted}>
-              <DeletedTodo />
-            </button>
+            <>
+              {!showDeleted && (
+                <h1 className="text-2xl p-3 ">
+                  <span className="bg-green-300 px-1 rounded-md hover:bg-green-500">
+                    <TodoModal
+                      todo={newTodoItem}
+                      title="Add New Todo"
+                      onUpdate={addTodo}
+                    />
+                  </span>
+                </h1>
+              )}
+
+              <button onClick={resetDeleted}>
+                <DeletedTodo />
+              </button>
+            </>
           )}
         </div>
         {jwtToken !== "" && (
-          <TodoRemove todos={filteredTodos} deleteAllCompleted={deleteAllCompleted} />
+          <TodoRemove
+            todos={filteredTodos}
+            deleteAllCompleted={deleteAllCompleted}
+          />
         )}
         <hr className="mb-3"></hr>
         {jwtToken !== "" ? (

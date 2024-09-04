@@ -3,11 +3,12 @@ import { Todo } from "../types/todo";
 import { useShowDeletedStore } from "../store";
 
 interface TodoModalProps {
-  todo: Todo;
+  title: string;
+  todo: Todo
   onUpdate: (updatedTodo: Todo) => void;
 }
 
-export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
+export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
   const [showModal, setShowModal] = React.useState(false);
   const [editedTodo, setEditedTodo] = React.useState(todo);
 
@@ -31,7 +32,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     editedTodo.updatedAt = new Date().toISOString();
-    onUpdate(editedTodo);
+    onUpdate(editedTodo)
     setShowModal(false);
   };
 
@@ -46,14 +47,16 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
     maxWidth: "400px", // Adjust the max width as needed
   };
 
-  const formattedDate = new Date(editedTodo.updatedAt).toLocaleString("ja-JP", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+  const formattedDate = editedTodo.updatedAt
+  ? new Date(editedTodo.updatedAt).toLocaleString('ja-JP', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    })
+  : "Invalid Date";
 
   return (
     <>
@@ -62,7 +65,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        {editedTodo.title}
+        {title}
       </button>
       {showModal && (
         <>
