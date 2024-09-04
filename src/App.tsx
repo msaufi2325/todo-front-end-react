@@ -59,7 +59,7 @@ function App() {
               </Link>
             </div>
           ) : (
-            <button onClick={() => setLogoutJwtToken()}>
+            <button onClick={setLogoutJwtToken}>
               <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">
                 Logout
               </span>
@@ -67,12 +67,12 @@ function App() {
           )}
         </div>
         <div className="flex gap-1">
-          <Link to="/" onClick={() => resetTodos()}>
+          <Link to="/" onClick={resetTodos}>
             <MyTodo />
           </Link>
 
           {jwtToken !== "" && (
-            <button onClick={() => resetDeleted()}>
+            <button onClick={resetDeleted}>
               <DeletedTodo />
             </button>
           )}
