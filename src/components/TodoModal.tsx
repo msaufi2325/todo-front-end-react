@@ -79,6 +79,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                     value={editedTodo.title}
                     onChange={handleInputChange}
                     className="border border-solid border-blueGray-200 rounded p-2"
+                    disabled={showDeleted} 
                   />
                   <label className="relative mt-4" htmlFor="description">
                     Description:
@@ -89,6 +90,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                     onChange={handleInputChange}
                     className="border border-solid border-blueGray-200 rounded p-2"
                     rows={calculateRows(editedTodo.description)}
+                    disabled={showDeleted}
                   />
                 </form>
                 <div className="flex items-center">
@@ -99,6 +101,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                       value={editedTodo.category}
                       onChange={handleInputChange}
                       className="border border-solid border-blueGray-200 rounded ml-1 px-1"
+                      disabled={showDeleted}
                     >
                       {categoryOptions.map((category) => (
                         <option key={category} value={category}>
@@ -114,6 +117,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                       value={editedTodo.priority}
                       onChange={handleInputChange}
                       className="border border-solid border-blueGray-200 rounded ml-1 px-1"
+                      disabled={showDeleted}
                     >
                       {priorityOptions.map((priority) => (
                         <option key={priority} value={priority}>
