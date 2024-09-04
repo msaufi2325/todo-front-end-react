@@ -37,12 +37,12 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
     maxWidth: "400px", // Adjust the max width as needed
   };
 
-  const formattedDate = new Date(editedTodo.updatedAt).toLocaleString('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
+  const formattedDate = new Date(editedTodo.updatedAt).toLocaleString("ja-JP", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
     hour12: false,
   });
 
@@ -81,28 +81,29 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                     className="border border-solid border-blueGray-200 rounded p-2"
                     rows={calculateRows(editedTodo.description)}
                   />
-                  
                 </form>
-                <p className="text-sm text-gray-500">Last updated: {formattedDate}</p>
+                <p className="text-sm text-gray-500">
+                  Last updated: {formattedDate}
+                </p>
                 <div className="flex items-center justify-end">
-                    <button
-                      className="text-white font-bold rounded-md bg-orange-600 uppercase px-4 py-2 text-sm outline-none focus:outline-none mr-1 m-2 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => {
-                        setEditedTodo(todo);
-                        setShowModal(false);
-                      }}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      className="text-white bg-green-600 rounded-md font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 m-2 ease-linear transition-all duration-150"
-                      onClick={handleSubmit}
-                    >
-                      Save
-                    </button>
-                  </div>
+                  <button
+                    className="text-white font-bold rounded-md bg-orange-600 uppercase px-4 py-2 text-sm outline-none focus:outline-none mr-1 m-2 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => {
+                      setEditedTodo(todo);
+                      setShowModal(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="text-white bg-green-600 rounded-md font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 m-2 ease-linear transition-all duration-150"
+                    onClick={handleSubmit}
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
           </div>
