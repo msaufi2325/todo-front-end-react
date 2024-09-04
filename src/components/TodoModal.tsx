@@ -23,6 +23,17 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
     onUpdate(editedTodo);
     setShowModal(false);
   };
+
+  const calculateRows = (text: string) => {
+    const lines = text.split('\n').length;
+    const extraRows = Math.floor(text.length / 20); // Adjust 50 based on average characters per line
+    return lines + extraRows;
+  };
+
+  const modalStyle = {
+    width: '80%', // Adjust the percentage as needed
+    maxWidth: '400px', // Adjust the max width as needed
+  };
   
   return (
     <>
@@ -36,10 +47,10 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
       {showModal && (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-auto my-6 mx-auto" style={modalStyle}>
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col p-5 border-b border-solid border-blueGray-200 rounded-t"
+                className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none p-3"
               >
                 <label className="text-xl font-semibold" htmlFor="name">
                   Title:
@@ -60,6 +71,7 @@ export default function TodoModal({ todo, onUpdate }: TodoModalProps) {
                     value={editedTodo.description}
                     onChange={handleInputChange}
                     className="border border-solid border-blueGray-200 rounded p-2"
+                    rows={calculateRows(editedTodo.description)}
                   />
                 <div className="flex items-center justify-end border-t border-solid border-blueGray-200 rounded-b">
                   <button
