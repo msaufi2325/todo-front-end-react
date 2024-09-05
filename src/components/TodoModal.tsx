@@ -63,8 +63,8 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
       })
     : "Invalid Date";
 
-    const formattedDateCreatedAt = editedTodo.createdAt
-    ? new Date(editedTodo.updatedAt).toLocaleString("ja-JP", {
+  const formattedDateCreatedAt = editedTodo.createdAt
+    ? new Date(editedTodo.createdAt).toLocaleString("ja-JP", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
