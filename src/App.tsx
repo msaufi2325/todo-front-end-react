@@ -102,7 +102,13 @@ function App() {
         <hr className="mb-3"></hr>
         {jwtToken !== "" ? (
           <div className="flex items-center gap-1">
-            <h3 className="p-1">Category:</h3>
+            <button onClick={() => setSelectedCategory(null)}>
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-gray-200 px-1 rounded-md hover:bg-gray-500">
+                  Category:
+                </span>
+              </h2>
+            </button>
             <button onClick={() => setSelectedCategory("work")}>
               <h2 className="font-semibold text-xl p-1">
                 <span className="bg-purple-200 px-1 rounded-md hover:bg-purple-500">
@@ -126,7 +132,7 @@ function App() {
             </button>
             <button onClick={() => setSelectedCategory("others")}>
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-gray-200 px-1 rounded-md hover:bg-gray-500">
+                <span className="bg-teal-200 px-1 rounded-md hover:bg-teal-500">
                   Others
                 </span>
               </h2>
@@ -143,7 +149,13 @@ function App() {
         {jwtToken !== "" && (
           <>
             <div className="flex items-center gap-1">
-              <h3 className="p-1">Priority:</h3>
+              <button onClick={() => setSelectedPriority(null)}>
+                <h2 className="font-semibold text-xl p-1">
+                  <span className="bg-gray-200 px-1 rounded-md hover:bg-gray-500">
+                    Priority:
+                  </span>
+                </h2>
+              </button>
               <button onClick={() => setSelectedPriority("low")}>
                 <h2 className="font-semibold text-xl p-1">
                   <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
