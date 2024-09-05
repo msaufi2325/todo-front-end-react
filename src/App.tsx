@@ -76,10 +76,10 @@ function App() {
           {jwtToken !== "" && (
             <>
               {!showDeleted && (
-                <h1 className="p-3 ">
-                  <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500">
+                <h1 className="p-3">
+                  <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500" >
                     <TodoModal
-                      todo={newTodo()}
+                      todo={newTodo}
                       title="Add New Todo"
                       onUpdate={addTodo}
                     />

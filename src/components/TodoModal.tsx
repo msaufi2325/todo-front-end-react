@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Todo } from "../types/todo";
 import { useShowDeletedStore } from "../store";
 import styles from './TodoModal.module.css';
@@ -12,6 +12,10 @@ interface TodoModalProps {
 export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
   const [showModal, setShowModal] = React.useState(false);
   const [editedTodo, setEditedTodo] = React.useState(todo);
+
+  useEffect(() => {
+    setEditedTodo(todo);
+  }, [todo]);
 
   const categoryOptions: Todo["category"][] = ["work", "home", "hobby"];
   const priorityOptions: Todo["priority"][] = ["low", "medium", "high"];

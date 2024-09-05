@@ -53,21 +53,24 @@ export default function useTodos() {
     );
   }
 
-  function newTodo(): Todo {
-    return {
-      id: todos.length,
-      title: "",
-      description: "",
-      category: "work",
-      priority: "medium",
-      isCompleted: false,
-      isRemoved: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+  const newTodoInit: Todo = {
+    id: todos.length,
+    title: "",
+    description: "",
+    category: "work",
+    priority: "medium",
+    isCompleted: false,
+    isRemoved: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  const [newTodo, setNewTodo] = useState<Todo>(newTodoInit);
+  function resetNewTodo() {
+    setNewTodo(newTodoInit);
   }
 
   function addTodo (newTodo: Todo) {
+    resetNewTodo();
     setTodos((prevTodos) => [
       ...prevTodos,
       {
