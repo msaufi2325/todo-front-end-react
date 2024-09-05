@@ -39,7 +39,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
 
   const calculateRows = (text: string) => {
     const lines = text.split("\n").length;
-    const extraRows = Math.floor(text.length / 20); // Adjust 50 based on average characters per line
+    const extraRows = Math.floor(text.length / 50); // Adjust 50 based on average characters per line
     return lines + extraRows;
   };
 
