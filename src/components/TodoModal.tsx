@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Todo } from "../types/todo";
 import { useShowDeletedStore } from "../store";
-import styles from './TodoModal.module.css';
+import styles from "./TodoModal.module.css";
 
 interface TodoModalProps {
   title: string;
-  todo: Todo
+  todo: Todo;
   onUpdate: (updatedTodo: Todo) => void;
 }
 
@@ -37,7 +37,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     editedTodo.updatedAt = new Date().toISOString();
-    onUpdate(editedTodo)
+    onUpdate(editedTodo);
     setShowModal(false);
   };
 
@@ -53,15 +53,15 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
   };
 
   const formattedDate = editedTodo.updatedAt
-  ? new Date(editedTodo.updatedAt).toLocaleString('ja-JP', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    })
-  : "Invalid Date";
+    ? new Date(editedTodo.updatedAt).toLocaleString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+    : "Invalid Date";
 
   return (
     <>
@@ -75,7 +75,10 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
       {showModal && (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className={`relative w-auto my-6 mx-auto ${styles.modal}`} style={modalStyle}>
+            <div
+              className={`relative w-auto my-6 mx-auto ${styles.modal}`}
+              style={modalStyle}
+            >
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none p-3">
                 <form className="flex flex-col">
                   <label className="text-xl font-semibold" htmlFor="name">
@@ -87,7 +90,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     value={editedTodo.title}
                     onChange={handleInputChange}
                     className="border border-solid border-blueGray-200 rounded p-2"
-                    disabled={showDeleted} 
+                    disabled={showDeleted}
                   />
                   <label className="relative mt-4" htmlFor="description">
                     Description:
@@ -135,9 +138,11 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     </select>
                   </label>
                 </div>
-                <p className="text-sm text-gray-500">
-                  Last updated: {formattedDate}
-                </p>
+                {todo.title && (
+                  <p className="text-sm text-gray-500">
+                    Last updated: {formattedDate}
+                  </p>
+                )}
                 <div className="flex items-center justify-end">
                   <button
                     className="text-white font-bold rounded-md bg-orange-600 uppercase px-4 py-2 text-sm outline-none focus:outline-none mr-1 m-2 ease-linear transition-all duration-150"
