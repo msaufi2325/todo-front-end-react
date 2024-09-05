@@ -10,10 +10,14 @@ interface TodoItemProps {
 }
 
 export default function TodoList({ todos, onCompletedChange, onRemovedChange, onDelete, onUpdate }: TodoItemProps) {
+  const todoSorted = todos.sort((a, b) => {
+    return a.isCompleted === b.isCompleted ? 0 : a.isCompleted ? 1 : -1;
+  });
+
   return (
     <>
       <div className="space-y-2">
-        {todos.map((todo) => (
+        {todoSorted.map((todo) => (
           <TodoItem
             key={todo.id}
             todo={todo}
