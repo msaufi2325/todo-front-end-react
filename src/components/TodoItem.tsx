@@ -1,4 +1,4 @@
-import { Trash2, Undo2 } from "lucide-react";
+import { Pencil, Trash2, Undo2 } from "lucide-react";
 import { Todo } from "../types/todo";
 import SpanColor from "./SpanColor";
 import { useShowDeletedStore } from "../store";
@@ -37,8 +37,11 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onD
           <SpanColor colorType={todo.priority} />
         </p>
       </div>
-      <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
+      <label className="flex justify-between items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50 grow">
         <TodoModal title={todo.title} todo={todo} onUpdate={onUpdate} />
+        {!showDeleted && (
+          <Pencil size={20} className="text-gray-500"/>
+        )}
       </label>
       <button
         onClick={() => onRemovedChange(todo.id)}
