@@ -8,6 +8,9 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
 
   const navigate = useNavigate();
@@ -15,14 +18,34 @@ function Login() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const payload = {
-      email: email,
-      password: password,
-    };
+    let valid = true;
 
-    console.log(payload);
-    setLoginJwtToken();
-    navigate("/");
+    if (!email) {
+      setEmailError('Email is required');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (!password) {
+      setPasswordError('Password is required');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    if (valid) {
+      const payload = {
+        email: email,
+        password: password,
+      };
+  
+      console.log(payload);
+      setLoginJwtToken();
+      navigate("/");
+    }
+
+    
   };
 
   return (
@@ -54,6 +77,7 @@ function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+            {emailError && <p className="text-red-500">{emailError}</p>}
           </div>
 
           <div>
@@ -74,6 +98,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            {passwordError && <p className="text-red-500">{passwordError}</p>}
           </div>
 
           <div>
