@@ -53,7 +53,7 @@ export default function useTodos() {
     );
   }
 
-  function newTodo() {
+  function newTodo(): Todo {
     return {
       id: todos.length + 1,
       title: "",

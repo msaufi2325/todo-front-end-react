@@ -7,7 +7,6 @@ import TodoRemove from "./components/TodoRemove";
 import DeletedTodo from "./components/DeletedTodo";
 import { useState } from "react";
 import TodoModal from "./components/TodoModal";
-import { Todo } from "./types/todo";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -42,8 +41,6 @@ function App() {
     resetFilter();
     useShowDeletedStore.getState().setShowDeleted(true)
   };
-
-  const newTodoItem: Todo = newTodo();
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -81,7 +78,7 @@ function App() {
                 <h1 className="text-2xl p-3 ">
                   <span className="bg-green-300 px-1 rounded-md hover:bg-green-500">
                     <TodoModal
-                      todo={newTodoItem}
+                      todo={newTodo()}
                       title="Add New Todo"
                       onUpdate={addTodo}
                     />
