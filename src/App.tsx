@@ -111,28 +111,28 @@ function App() {
             </button>
             <button onClick={() => setSelectedCategory("work")}>
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-purple-200 px-1 rounded-md hover:bg-purple-500">
+                <span className={`px-1 rounded-md ${selectedCategory === "work" ? "bg-purple-500" : "bg-purple-200 hover:bg-purple-500"}`}>
                   Work
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("home")}>
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-green-200 px-1 rounded-md hover:bg-green-500">
+                <span className={`px-1 rounded-md ${selectedCategory === "home" ? "bg-green-500" : "bg-green-200 hover:bg-green-500"}`}>
                   Home
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("hobby")}>
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-blue-200 px-1 rounded-md hover:bg-blue-500">
+                <span className={`px-1 rounded-md ${selectedCategory === "hobby" ? "bg-blue-500" : "bg-blue-200 hover:bg-blue-500"}`}>
                   Hobby
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("others")}>
               <h2 className="font-semibold text-xl p-1">
-                <span className="bg-teal-200 px-1 rounded-md hover:bg-teal-500">
+                <span className={`px-1 rounded-md ${selectedCategory === "others" ? "bg-teal-500" : "bg-teal-200 hover:bg-teal-500"}`}>
                   Others
                 </span>
               </h2>
@@ -158,21 +158,21 @@ function App() {
               </button>
               <button onClick={() => setSelectedPriority("low")}>
                 <h2 className="font-semibold text-xl p-1">
-                  <span className="bg-yellow-200 px-1 rounded-md hover:bg-yellow-500">
+                  <span className={`px-1 rounded-md ${selectedPriority === "low" ? "bg-yellow-500" : "bg-yellow-200 hover:bg-yellow-500"}`}>
                     Low
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("medium")}>
                 <h2 className="font-semibold text-xl p-1">
-                  <span className="bg-orange-200 px-1 rounded-md hover:bg-purple-500">
+                  <span className={`px-1 rounded-md ${selectedPriority === "medium" ? "bg-orange-500" : "bg-orange-200 hover:bg-orange-500"}`}>
                     Medium
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("high")}>
                 <h2 className="font-semibold text-xl p-1">
-                  <span className="bg-red-200 px-1 rounded-md hover:bg-red-500">
+                  <span className={`px-1 rounded-md ${selectedPriority === "high" ? "bg-red-500" : "bg-red-200 hover:bg-red-500"}`}>
                     High
                   </span>
                 </h2>
