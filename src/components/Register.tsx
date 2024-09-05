@@ -10,6 +10,10 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const navigate = useNavigate();
 
   const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
@@ -18,14 +22,40 @@ const Register: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Add your registration logic here
-    const payload = {
-      username: username,
-      email: email,
-      password: password
-    };
-    console.log(payload);
-    setLoginJwtToken();
-    navigate("/");
+    let valid = true;
+
+    if (!username) {
+      setUsernameError('Username is required');
+      valid = false;
+    } else {
+      setUsernameError('');
+    }
+
+    if (!email) {
+      setEmailError('Email is required');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (!password) {
+      setPasswordError('Password is required');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    if (valid) {
+      const payload = {
+        username: username,
+        email: email,
+        password: password
+      };
+      console.log(payload);
+      setLoginJwtToken();
+      navigate("/");
+    }
+    
   };
 
   return (
@@ -62,6 +92,7 @@ const Register: React.FC = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
+            {usernameError && <p className="text-red-500">{emailError}</p>}
           </div>
 
           <div>
@@ -80,6 +111,7 @@ const Register: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+            {emailError && <p className="text-red-500">{emailError}</p>}
           </div>
 
           <div>
@@ -100,6 +132,7 @@ const Register: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            {passwordError && <p className="text-red-500">{passwordError}</p>}
           </div>
 
           <div>
