@@ -92,7 +92,7 @@ const Register: React.FC = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-            {usernameError && <p className="text-red-500">{emailError}</p>}
+            {usernameError && <p className="text-red-500">{usernameError}</p>}
           </div>
 
           <div>
