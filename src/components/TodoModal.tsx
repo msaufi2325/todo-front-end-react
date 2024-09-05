@@ -1,6 +1,7 @@
 import React from "react";
 import { Todo } from "../types/todo";
 import { useShowDeletedStore } from "../store";
+import styles from './TodoModal.module.css';
 
 interface TodoModalProps {
   title: string;
@@ -70,7 +71,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
       {showModal && (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto" style={modalStyle}>
+            <div className={`relative w-auto my-6 mx-auto ${styles.modal}`} style={modalStyle}>
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none p-3">
                 <form className="flex flex-col">
                   <label className="text-xl font-semibold" htmlFor="name">

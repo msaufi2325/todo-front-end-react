@@ -7,6 +7,7 @@ import TodoRemove from "./components/TodoRemove";
 import DeletedTodo from "./components/DeletedTodo";
 import { useState } from "react";
 import TodoModal from "./components/TodoModal";
+import "./index.css";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -75,8 +76,8 @@ function App() {
           {jwtToken !== "" && (
             <>
               {!showDeleted && (
-                <h1 className="text-2xl p-3 ">
-                  <span className="bg-green-300 px-1 rounded-md hover:bg-green-500">
+                <h1 className="p-3 ">
+                  <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500">
                     <TodoModal
                       todo={newTodo()}
                       title="Add New Todo"
