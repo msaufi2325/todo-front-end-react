@@ -63,6 +63,17 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
       })
     : "Invalid Date";
 
+    const formattedDateCreatedAt = editedTodo.createdAt
+    ? new Date(editedTodo.updatedAt).toLocaleString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+    : "Invalid Date";
+
   return (
     <>
       <button
@@ -138,9 +149,12 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     </select>
                   </label>
                 </div>
+                <hr className="my-2" />
                 {todo.title && (
                   <p className="text-sm text-gray-500">
+                    Created: {formattedDateCreatedAt} <br />
                     Last updated: {formattedDate}
+                    
                   </p>
                 )}
                 <div className="flex items-center justify-end">
