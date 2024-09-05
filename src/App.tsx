@@ -124,6 +124,13 @@ function App() {
                 </span>
               </h2>
             </button>
+            <button onClick={() => setSelectedCategory("others")}>
+              <h2 className="font-semibold text-xl p-1">
+                <span className="bg-gray-200 px-1 rounded-md hover:bg-gray-500">
+                  Others
+                </span>
+              </h2>
+            </button>
           </div>
         ) : (
           <div>

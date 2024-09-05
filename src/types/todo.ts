@@ -10,6 +10,6 @@ export interface Todo {
   updatedAt: string;
 }
 
-type category = "work" | "home" | "hobby";
+type category = "work" | "home" | "hobby" | "others";
 
 type priority = "high" | "medium" | "low";

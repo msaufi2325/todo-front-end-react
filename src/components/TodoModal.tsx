@@ -17,7 +17,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
     setEditedTodo(todo);
   }, [todo]);
 
-  const categoryOptions: Todo["category"][] = ["work", "home", "hobby"];
+  const categoryOptions: Todo["category"][] = ["work", "home", "hobby", "others"];
   const priorityOptions: Todo["priority"][] = ["low", "medium", "high"];
 
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
