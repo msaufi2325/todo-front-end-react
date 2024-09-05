@@ -55,7 +55,7 @@ export default function useTodos() {
 
   function newTodo(): Todo {
     return {
-      id: todos.length + 1,
+      id: todos.length,
       title: "",
       description: "",
       category: "work",
@@ -68,7 +68,20 @@ export default function useTodos() {
   }
 
   function addTodo (newTodo: Todo) {
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      {
+        id: Math.max(...prevTodos.map((todo) => todo.id)) + 1,
+        title: newTodo.title,
+        description: newTodo.description,
+        category: newTodo.category,
+        priority: newTodo.priority,
+        isCompleted: newTodo.isCompleted,
+        isRemoved: newTodo.isRemoved,
+        createdAt: newTodo.createdAt,
+        updatedAt: newTodo.updatedAt,
+      }
+    ]);
   }
 
   return {
