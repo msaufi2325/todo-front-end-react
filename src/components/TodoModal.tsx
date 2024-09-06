@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Todo } from "../types/todo";
 import { useShowDeletedStore } from "../store";
 import styles from "./TodoModal.module.css";
@@ -12,6 +12,7 @@ interface TodoModalProps {
 export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
   const [showModal, setShowModal] = React.useState(false);
   const [editedTodo, setEditedTodo] = React.useState(todo);
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   useEffect(() => {
     setEditedTodo(todo);
@@ -32,10 +33,21 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
       ...editedTodo,
       [name]: value,
     });
+
+    if (name === "title" && value.trim() === "") {
+      setErrorMessage("Title is required");
+    } else {
+      setErrorMessage("");
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (editedTodo.title.trim() === "") {
+      setErrorMessage("Title is required");
+      return;
+    }
+
     editedTodo.updatedAt = new Date().toISOString();
     onUpdate(editedTodo);
     setShowModal(false);
@@ -43,6 +55,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
 
   const handleCancel = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
     setEditedTodo(todo);
     setShowModal(false);
   }
@@ -109,6 +122,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     className="border border-solid border-blueGray-200 rounded p-2"
                     disabled={showDeleted}
                   />
+                  {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                   <label className="relative mt-4" htmlFor="description">
                     Description:
                   </label>
