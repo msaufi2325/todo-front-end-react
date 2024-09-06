@@ -13,7 +13,7 @@ const getColorClass = (colorType: colorType) => {
   } else if (colorType === "home") {
     return "bg-green-200 px-1 rounded-md";
   } else if (colorType === "others") {
-    return "bg-gray-200 px-1 rounded-md";
+    return "bg-teal-200 px-1 rounded-md";
   } else if (colorType === "hobby") {
     return "bg-blue-200 px-1 rounded-md";
   } else if (colorType === "low") {
