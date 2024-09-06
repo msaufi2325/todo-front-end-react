@@ -61,14 +61,14 @@ function App() {
               </Link>
             </div>
           ) : (
-            <button onClick={setLogoutJwtToken}>
+            <button className="pr-7" onClick={setLogoutJwtToken}>
               <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">
                 Logout
               </span>
             </button>
           )}
         </div>
-        <div className="flex gap-1">
+        <div className="flex">
           <Link to="/" onClick={resetTodos}>
             <MyTodo />
           </Link>
@@ -80,7 +80,7 @@ function App() {
                   <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500" >
                     <TodoModal
                       todo={newTodo}
-                      title="Add New Todo"
+                      title="Add New"
                       onUpdate={addTodo}
                     />
                   </span>
@@ -101,37 +101,37 @@ function App() {
         )}
         <hr className="mb-3"></hr>
         {jwtToken !== "" ? (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center">
             <button onClick={() => setSelectedCategory(null)}>
-              <h2 className="font-semibold text-xl p-1">
+              <h2 className="font-semibold text-l p-1">
                 <span className={`px-1 rounded-md ${selectedCategory === null ? "bg-gray-500 text-white" : "bg-gray-200 hover:bg-gray-500"}`}>
                   Category:
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("work")}>
-              <h2 className="font-semibold text-xl p-1">
+              <h2 className="font-semibold text-l p-1">
                 <span className={`px-1 rounded-md ${selectedCategory === "work" ? "bg-purple-500 text-white" : "bg-purple-200 hover:bg-purple-500"}`}>
                   Work
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("home")}>
-              <h2 className="font-semibold text-xl p-1">
+              <h2 className="font-semibold text-l p-1">
                 <span className={`px-1 rounded-md ${selectedCategory === "home" ? "bg-green-500 text-white" : "bg-green-200 hover:bg-green-500"}`}>
                   Home
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("hobby")}>
-              <h2 className="font-semibold text-xl p-1">
+              <h2 className="font-semibold text-l p-1">
                 <span className={`px-1 rounded-md ${selectedCategory === "hobby" ? "bg-blue-500 text-white" : "bg-blue-200 hover:bg-blue-500"}`}>
                   Hobby
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("others")}>
-              <h2 className="font-semibold text-xl p-1">
+              <h2 className="font-semibold text-l p-1">
                 <span className={`px-1 rounded-md ${selectedCategory === "others" ? "bg-teal-500 text-white" : "bg-teal-200 hover:bg-teal-500"}`}>
                   Others
                 </span>
@@ -139,7 +139,7 @@ function App() {
             </button>
           </div>
         ) : (
-          <div>
+          <div className="px-5">
             <h2>
               Please login to see your todo list and add new todo items. <br />
               Or register if you don't have an account.
@@ -148,30 +148,30 @@ function App() {
         )}
         {jwtToken !== "" && (
           <>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center">
               <button onClick={() => setSelectedPriority(null)}>
-                <h2 className="font-semibold text-xl p-1">
+                <h2 className="font-semibold text-l p-1">
                   <span className={`px-1 rounded-md ${selectedPriority === null ? "bg-gray-500 text-white" : "bg-gray-200 hover:bg-gray-500"}`}>
                     Priority:
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("low")}>
-                <h2 className="font-semibold text-xl p-1">
+                <h2 className="font-semibold text-l p-1">
                   <span className={`px-1 rounded-md ${selectedPriority === "low" ? "bg-yellow-500 text-white" : "bg-yellow-200 hover:bg-yellow-500"}`}>
                     Low
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("medium")}>
-                <h2 className="font-semibold text-xl p-1">
+                <h2 className="font-semibold text-l p-1">
                   <span className={`px-1 rounded-md ${selectedPriority === "medium" ? "bg-orange-500 text-white" : "bg-orange-200 hover:bg-orange-500"}`}>
                     Medium
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("high")}>
-                <h2 className="font-semibold text-xl p-1">
+                <h2 className="font-semibold text-l p-1">
                   <span className={`px-1 rounded-md ${selectedPriority === "high" ? "bg-red-500 text-white" : "bg-red-200 hover:bg-red-500"}`}>
                     High
                   </span>
