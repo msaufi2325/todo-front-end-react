@@ -1,14 +1,19 @@
 import React, { forwardRef } from 'react';
+import { Todo } from '../types/todo';
+
+type colorType = Todo["category"] | Todo["priority"];
 
 interface SpanColorProps extends React.HTMLAttributes<HTMLSpanElement> {
-  colorType: string;
+  colorType: colorType;
 }
 
-const getColorClass = (colorType: string) => {
+const getColorClass = (colorType: colorType) => {
   if (colorType === "work") {
     return "bg-purple-200 px-1 rounded-md";
   } else if (colorType === "home") {
     return "bg-green-200 px-1 rounded-md";
+  } else if (colorType === "others") {
+    return "bg-gray-200 px-1 rounded-md";
   } else if (colorType === "hobby") {
     return "bg-blue-200 px-1 rounded-md";
   } else if (colorType === "low") {
