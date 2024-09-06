@@ -41,6 +41,12 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
     setShowModal(false);
   };
 
+  const handleCancel = (e: React.FormEvent) => {
+    e.preventDefault();
+    setEditedTodo(todo);
+    setShowModal(false);
+  }
+
   const calculateRows = (text: string) => {
     const lines = text.split("\n").length;
     const extraRows = Math.floor(text.length / 50); // Adjust 50 based on average characters per line
@@ -161,10 +167,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                   <button
                     className="text-white font-bold rounded-md bg-orange-600 uppercase px-4 py-2 text-sm outline-none focus:outline-none mr-1 m-2 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => {
-                      setEditedTodo(todo);
-                      setShowModal(false);
-                    }}
+                    onClick={handleCancel}
                   >
                     {showDeleted ? "Close" : "Cancel"}
                   </button>
