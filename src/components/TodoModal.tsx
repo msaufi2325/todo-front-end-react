@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Todo } from "../types/todo";
 import { useShowDeletedStore } from "../store";
 import styles from "./TodoModal.module.css";
@@ -13,10 +13,17 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
   const [showModal, setShowModal] = React.useState(false);
   const [editedTodo, setEditedTodo] = React.useState(todo);
   const [errorMessage, setErrorMessage] = useState<string>("")
+  const titleInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setEditedTodo(todo);
   }, [todo]);
+
+  useEffect(() => {
+    if (showModal) {
+      titleInputRef.current?.focus();
+    }
+  }, [showModal]);
 
   const categoryOptions: Todo["category"][] = ["work", "home", "hobby", "others"];
   const priorityOptions: Todo["priority"][] = ["low", "medium", "high"];
@@ -121,6 +128,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     onChange={handleInputChange}
                     className="border border-solid border-blueGray-200 rounded p-2"
                     disabled={showDeleted}
+                    ref={titleInputRef}
                   />
                   {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                   <label className="relative mt-4" htmlFor="description">
