@@ -4,10 +4,10 @@ export interface Todo {
   description: string;
   category: category;
   priority: priority;
-  isCompleted: boolean;
-  isRemoved: boolean;
-  createdAt: string;
-  updatedAt: string;
+  is_completed: boolean;
+  is_removed: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 type category = "work" | "home" | "hobby" | "others";

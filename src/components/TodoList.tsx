@@ -11,7 +11,7 @@ interface TodoItemProps {
 
 export default function TodoList({ todos, onCompletedChange, onRemovedChange, onDelete, onUpdate }: TodoItemProps) {
   const todoSorted = todos.sort((a, b) => {
-    return a.isCompleted === b.isCompleted ? 0 : a.isCompleted ? 1 : -1;
+    return a.is_completed === b.is_completed ? 0 : a.is_completed ? 1 : -1;
   });
 
   return (

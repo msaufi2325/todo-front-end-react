@@ -11,7 +11,7 @@ export default function TodoRemove({
   todos,
   deleteAllCompleted,
 }: TodoRemoveProps) {
-  const completedTodos = todos.filter((todo) => todo.isCompleted);
+  const completedTodos = todos.filter((todo) => todo.is_completed);
   
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
 

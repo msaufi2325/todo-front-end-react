@@ -19,7 +19,7 @@ function App() {
 
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
 
-  const todosDisplay = todos.filter(todo => todo.isRemoved === showDeleted);
+  const todosDisplay = todos.filter(todo => todo.is_removed === showDeleted);
 
   const filteredTodos = todosDisplay.filter(todo => {
     return (

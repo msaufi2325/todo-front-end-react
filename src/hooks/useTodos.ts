@@ -37,7 +37,7 @@ export default function useTodos() {
   function setRemoved(id: number) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isRemoved: !todo.isRemoved } : todo
+        todo.id === id ? { ...todo, isRemoved: !todo.is_removed } : todo
       )
     );
   }
@@ -45,7 +45,7 @@ export default function useTodos() {
   function deleteAllCompleted() {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.isCompleted ? { ...todo, isRemoved: true } : todo
+        todo.is_completed ? { ...todo, isRemoved: true } : todo
       )
     );
   }
@@ -70,10 +70,10 @@ export default function useTodos() {
     description: "",
     category: "others",
     priority: "low",
-    isCompleted: false,
-    isRemoved: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    is_completed: false,
+    is_removed: false,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   };
   const [newTodo, setNewTodo] = useState<Todo>(newTodoInit);
   function resetNewTodo() {
@@ -90,10 +90,10 @@ export default function useTodos() {
         description: newTodo.description,
         category: newTodo.category,
         priority: newTodo.priority,
-        isCompleted: newTodo.isCompleted,
-        isRemoved: newTodo.isRemoved,
-        createdAt: newTodo.createdAt,
-        updatedAt: newTodo.updatedAt,
+        is_completed: newTodo.is_completed,
+        is_removed: newTodo.is_removed,
+        created_at: newTodo.created_at,
+        updated_at: newTodo.updated_at,
       }
     ]);
   }

@@ -22,7 +22,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onD
       ) : (
         <input
           type="checkbox"
-          checked={todo.isCompleted}
+          checked={todo.is_completed}
           onChange={(e) => onCompletedChange(todo.id, e.target.checked)}
           className="scale-125"
           title="Check item as completed"

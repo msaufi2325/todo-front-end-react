@@ -55,7 +55,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
       return;
     }
 
-    editedTodo.updatedAt = new Date().toISOString();
+    editedTodo.updated_at = new Date().toISOString();
     onUpdate(editedTodo);
     setShowModal(false);
   };
@@ -78,8 +78,8 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
     maxWidth: "400px", // Adjust the max width as needed
   };
 
-  const formattedDate = editedTodo.updatedAt
-    ? new Date(editedTodo.updatedAt).toLocaleString("ja-JP", {
+  const formattedDate = editedTodo.updated_at
+    ? new Date(editedTodo.updated_at).toLocaleString("ja-JP", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
@@ -89,8 +89,8 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
       })
     : "Invalid Date";
 
-  const formattedDateCreatedAt = editedTodo.createdAt
-    ? new Date(editedTodo.createdAt).toLocaleString("ja-JP", {
+  const formattedDateCreatedAt = editedTodo.created_at
+    ? new Date(editedTodo.created_at).toLocaleString("ja-JP", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
@@ -103,7 +103,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
   return (
     <>
       <button
-        className={todo.isCompleted ? "line-through text-gray-400" : ""}
+        className={todo.is_completed ? "line-through text-gray-400" : ""}
         type="button"
         onClick={() => setShowModal(true)}
       >
