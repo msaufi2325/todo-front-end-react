@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Todo } from "../types/todo";
-// import { dummyTodoList } from "../assets/data/todoList";
 import { useJwtStore } from ".././store";
 
 export default function useTodos() {
@@ -12,7 +11,6 @@ export default function useTodos() {
     if (jwtToken === "") {
       return;
     }
-    // setTodos(dummyTodoList);
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
 
@@ -21,11 +19,11 @@ export default function useTodos() {
       headers: headers,
     }
 
-    fetch("http://localhost:8000/api/todos", requestOptions)
+    fetch("http://localhost:8081/todos", requestOptions)
       .then((response) => response.json())
       .then((data) => setTodos(data))
       .catch((error) => console.error(error));
-      
+
   }, [jwtToken]);
 
   function setCompleted(id: number, isCompleted: boolean) {
