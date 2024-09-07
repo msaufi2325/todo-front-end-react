@@ -8,6 +8,7 @@ export interface Todo {
   is_removed: boolean;
   created_at: string;
   updated_at: string;
+  user_id: number;
 }
 
 type category = "work" | "home" | "hobby" | "others";

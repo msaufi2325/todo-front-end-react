@@ -74,6 +74,7 @@ export default function useTodos() {
     is_removed: false,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
+    user_id: 1,
   };
   const [newTodo, setNewTodo] = useState<Todo>(newTodoInit);
   function resetNewTodo() {
@@ -94,6 +95,7 @@ export default function useTodos() {
         is_removed: newTodo.is_removed,
         created_at: newTodo.created_at,
         updated_at: newTodo.updated_at,
+        user_id: newTodo.user_id,
       }
     ]);
   }
