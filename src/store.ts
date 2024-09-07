@@ -7,7 +7,7 @@ type jwtStore = {
 };
 
 export const useJwtStore = create<jwtStore>((set) => ({
-  jwtToken: "",
+  jwtToken: "jwttoken",
   setLoginJwtToken: () => {
     set((state) => ({ jwtToken: state.jwtToken = "jwttoken" }));
   },
