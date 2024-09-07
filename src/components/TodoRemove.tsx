@@ -30,7 +30,7 @@ export default function TodoRemove({
               onClick={() => deleteAllCompleted(todos)}
               className="bg-red-500 text-white px-1 rounded-md hover:bg-red-600"
             >
-              Delete selected todos
+              Delete completed todo
             </button>
           )}
         </div>
