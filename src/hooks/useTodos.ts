@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Todo } from "../types/todo";
 import { useJwtStore } from ".././store";
-import { dummyTodoList } from "../assets/data/todoList";
 
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -12,27 +11,25 @@ export default function useTodos() {
     if (jwtToken === "") {
       return;
     }
-    // const headers = new Headers();
-    // headers.append("Content-Type", "application/json");
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
 
-    // const requestOptions = {
-    //   method: "GET",
-    //   headers: headers,
-    // }
+    const requestOptions = {
+      method: "GET",
+      headers: headers,
+    }
 
-    // fetch("http://localhost:8081/todos", requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => setTodos(data))
-    //   .catch((error) => console.error(error));
-
-    setTodos(dummyTodoList);
+    fetch("http://localhost:8081/todos", requestOptions)
+      .then((response) => response.json())
+      .then((data) => setTodos(data))
+      .catch((error) => console.error(error));
 
   }, [jwtToken]);
 
-  function setCompleted(id: number, isCompleted: boolean) {
+  function setCompleted(id: number, is_completed: boolean) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted } : todo
+        todo.id === id ? { ...todo, is_completed } : todo
       )
     );
   }
@@ -40,7 +37,7 @@ export default function useTodos() {
   function setRemoved(id: number) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isRemoved: !todo.is_removed } : todo
+        todo.id === id ? { ...todo, is_removed: !todo.is_removed } : todo
       )
     );
   }
@@ -48,7 +45,7 @@ export default function useTodos() {
   function deleteAllCompleted() {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.is_completed ? { ...todo, isRemoved: true } : todo
+        todo.is_completed ? { ...todo, is_removed: true } : todo
       )
     );
   }
