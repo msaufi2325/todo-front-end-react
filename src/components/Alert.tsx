@@ -1,12 +1,5 @@
-import { useEffect, useState } from "react";
 import { X } from "lucide-react"
-import { alertClass } from "../types/todo";
-
-interface AlertMessageProps {
-  title: string;
-  message: string;
-  alertClass: alertClass;
-}
+import { useAlertStore } from "../store";
 
 const getClassName = (alertClass: string) => {
   if (alertClass === "alert-danger") {
@@ -18,29 +11,24 @@ const getClassName = (alertClass: string) => {
   }
 };
 
-export default function AlertMessage({
-  title,
-  message,
-  alertClass,
-}: AlertMessageProps) {
-  const [showAlert, setShowAlert] = useState(false);
+export default function AlertMessage() {
 
-  useEffect(() => {
-    if (alertClass !== "none") {
-      setShowAlert(true);
-    }
-  }, [alertClass]);
+  const alertTitle = useAlertStore((state) => state.alertTitle);
+  const alertMessage = useAlertStore((state) => state.alertMessage);
+  const alertClass = useAlertStore((state) => state.alertClass);
+
+  const setAlertClass = useAlertStore((state) => state.setAlertClass);
 
   const handleCancel = () => {
-    setShowAlert(false);
+    setAlertClass("none");
   }
 
   return (
     <>
-      {showAlert && (
+      {alertClass !== "none" && (
         <div className={getClassName(alertClass)} role="alert">
-          <strong className="font-bold">{title}</strong>
-          <span className="px-1 pr-2 block sm:inline">{message}</span>
+          <strong className="font-bold">{alertTitle}</strong>
+          <span className="px-1 pr-2 block sm:inline">{alertMessage}</span>
           <span className="absolute top-0 bottom-0 right-0 px-4 py-3" style={{ cursor: "pointer" }}>
             <X onClick={handleCancel} />
           </span>
