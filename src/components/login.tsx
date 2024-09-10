@@ -40,20 +40,17 @@ function Login() {
     }
 
     if (valid) {
-      const payload = {
-        email: email,
-        password: password,
-      };
-      console.log(payload);
-
-      const requestOptions = {
+      fetch("http://localhost:8081/authenticate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(payload),
-      };
-
-      fetch(`/authenticate`, requestOptions)
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // or "same-origin" or "omit"
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      })
         .then((response) => response.json())
         .then((data) => {
           if (data.error) {
@@ -61,7 +58,7 @@ function Login() {
             setAlertMessage(data.error);
             setAlertClass("alert-danger");
           } else {
-            setLoginJwtToken(data.access_token)
+            setLoginJwtToken(data.access_token);
             setAlertClass("none");
             navigate("/");
           }
@@ -70,7 +67,7 @@ function Login() {
           setAlertTitle("Error");
           setAlertMessage(error.message);
           setAlertClass("alert-danger");
-        })
+        });
     }
   };
 
