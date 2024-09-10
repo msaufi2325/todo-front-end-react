@@ -55,7 +55,7 @@ function Login() {
         .then((data) => {
           if (data.error) {
             setAlertTitle("Error");
-            setAlertMessage(data.error);
+            setAlertMessage(data.message);
             setAlertClass("alert-danger");
           } else {
             setLoginJwtToken(data.access_token);
