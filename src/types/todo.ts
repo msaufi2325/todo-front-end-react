@@ -14,3 +14,5 @@ export interface Todo {
 type category = "work" | "home" | "hobby" | "others";
 
 type priority = "high" | "medium" | "low";
+
+export type alertClass = "alert-danger" | "alert-success" | "alert-info";

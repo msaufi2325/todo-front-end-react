@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import MyTodo from "./components/MyTodo";
-import { useJwtStore, useShowDeletedStore } from "./store";
+import { useAlertStore, useJwtStore, useShowDeletedStore } from "./store";
 import TodoList from "./components/TodoList";
 import useTodos from "./hooks/useTodos";
 import TodoRemove from "./components/TodoRemove";
@@ -8,6 +8,7 @@ import DeletedTodo from "./components/DeletedTodo";
 import { useState } from "react";
 import TodoModal from "./components/TodoModal";
 import "./index.css";
+import AlertMessage from "./components/Alert";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -42,6 +43,10 @@ function App() {
     resetFilter();
     useShowDeletedStore.getState().setShowDeleted(true)
   };
+
+  const alertTitle = useAlertStore((state) => state.alertTitle);
+  const alertMessage = useAlertStore((state) => state.alertMessage);
+  const alertClass = useAlertStore((state) => state.alertClass);
 
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -187,6 +192,9 @@ function App() {
             />
           </>
         )}
+        <div className="py-1 col-span-10">
+          <AlertMessage title={alertTitle} message={alertMessage} alertClass={alertClass}/>
+        </div>
       </div>
     </main>
   );
