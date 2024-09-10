@@ -2,14 +2,14 @@ import { create } from 'zustand';
 
 type jwtStore = {
   jwtToken: string;
-  setLoginJwtToken: () => void;
+  setLoginJwtToken: (jwtToken: string) => void;
   setLogoutJwtToken: () => void;
 };
 
 export const useJwtStore = create<jwtStore>((set) => ({
-  jwtToken: "jwttoken",
-  setLoginJwtToken: () => {
-    set((state) => ({ jwtToken: state.jwtToken = "jwttoken" }));
+  jwtToken: "",
+  setLoginJwtToken: (jwtToken: string) => {
+    set((state) => ({ jwtToken: state.jwtToken = jwtToken}));
   },
   setLogoutJwtToken: () => {
     set((state) => ({ jwtToken: state.jwtToken = "" }));

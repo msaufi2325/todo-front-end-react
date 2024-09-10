@@ -39,9 +39,26 @@ function Login() {
         email: email,
         password: password,
       };
-  
       console.log(payload);
-      setLoginJwtToken();
+  
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   credentials: "include",
+      //   body: JSON.stringify(payload),
+      // };
+
+      // fetch(`/authenticate`, requestOptions)
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     if (data.error) {
+            
+      //     } else {
+            
+      //     }
+      //   })
+
+      setLoginJwtToken("jwtToken");
       navigate("/");
     }
 
