@@ -9,12 +9,16 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
 
   const navigate = useNavigate();
+
+  const alertTitle = useAlertStore((state) => state.alertTitle);
+  const alertMessage = useAlertStore((state) => state.alertMessage);
+  const alertClass = useAlertStore((state) => state.alertClass);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,17 +26,17 @@ function Login() {
     let valid = true;
 
     if (!email) {
-      setEmailError('Email is required');
+      setEmailError("Email is required");
       valid = false;
     } else {
-      setEmailError('');
+      setEmailError("");
     }
 
     if (!password) {
-      setPasswordError('Password is required');
+      setPasswordError("Password is required");
       valid = false;
     } else {
-      setPasswordError('');
+      setPasswordError("");
     }
 
     if (valid) {
@@ -41,7 +45,7 @@ function Login() {
         password: password,
       };
       console.log(payload);
-  
+
       // const requestOptions = {
       //   method: "POST",
       //   headers: { "Content-Type": "application/json" },
@@ -53,23 +57,16 @@ function Login() {
       //   .then((response) => response.json())
       //   .then((data) => {
       //     if (data.error) {
-            
+
       //     } else {
-            
+
       //     }
       //   })
 
       setLoginJwtToken("jwtToken");
       navigate("/");
     }
-
-    
   };
-
-  const alertTitle = useAlertStore((state) => state.alertTitle);
-  const alertMessage = useAlertStore((state) => state.alertMessage);
-  const alertClass = useAlertStore((state) => state.alertClass);
-
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -81,12 +78,21 @@ function Login() {
           Sign in
         </h2>
         <div className="py-1 col-span-10">
-          <AlertMessage title={alertTitle} message={alertMessage} alertClass={alertClass}/>
+          <AlertMessage
+            title={alertTitle}
+            message={alertMessage}
+            alertClass={alertClass}
+          />
         </div>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+        <form
+          className="space-y-6"
+          action="#"
+          method="POST"
+          onSubmit={handleSubmit}
+        >
           <div>
             <label
               htmlFor="email"
