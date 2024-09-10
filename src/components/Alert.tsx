@@ -31,6 +31,10 @@ export default function AlertMessage({
     }
   }, [alertClass]);
 
+  const handleCancel = () => {
+    setShowAlert(false);
+  }
+
   return (
     <>
       {showAlert && (
@@ -38,7 +42,7 @@ export default function AlertMessage({
           <strong className="font-bold">{title}</strong>
           <span className="px-1 pr-2 block sm:inline">{message}</span>
           <span className="absolute top-0 bottom-0 right-0 px-4 py-3" style={{ cursor: "pointer" }}>
-            <X onClick={() => setShowAlert(false)} />
+            <X onClick={handleCancel} />
           </span>
         </div>
       )}
