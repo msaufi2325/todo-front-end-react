@@ -19,6 +19,9 @@ function Login() {
   const alertTitle = useAlertStore((state) => state.alertTitle);
   const alertMessage = useAlertStore((state) => state.alertMessage);
   const alertClass = useAlertStore((state) => state.alertClass);
+  const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
+  const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
+  const setAlertClass = useAlertStore((state) => state.setAlertClass);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,25 +49,31 @@ function Login() {
       };
       console.log(payload);
 
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   credentials: "include",
-      //   body: JSON.stringify(payload),
-      // };
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(payload),
+      };
 
-      // fetch(`/authenticate`, requestOptions)
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     if (data.error) {
-
-      //     } else {
-
-      //     }
-      //   })
-
-      setLoginJwtToken("jwtToken");
-      navigate("/");
+      fetch(`/authenticate`, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            setAlertTitle("Error");
+            setAlertMessage(data.error);
+            setAlertClass("alert-danger");
+          } else {
+            setLoginJwtToken(data.access_token)
+            setAlertClass("none");
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          setAlertTitle("Error");
+          setAlertMessage(error.message);
+          setAlertClass("alert-danger");
+        })
     }
   };
 

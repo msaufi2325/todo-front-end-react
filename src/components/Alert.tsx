@@ -36,7 +36,7 @@ export default function AlertMessage({
       {showAlert && (
         <div className={getClassName(alertClass)} role="alert">
           <strong className="font-bold">{title}</strong>
-          <span className="pl-1 block sm:inline">{message}</span>
+          <span className="px-1 pr-2 block sm:inline">{message}</span>
           <span className="absolute top-0 bottom-0 right-0 px-4 py-3" style={{ cursor: "pointer" }}>
             <X onClick={() => setShowAlert(false)} />
           </span>

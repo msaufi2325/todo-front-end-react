@@ -35,6 +35,7 @@ type alertStore = {
   alertClass: alertClass;
   setAlertTitle: (title: string) => void;
   setAlertMessage: (message: string) => void;
+  setAlertClass: (alertClass: alertClass) => void;
 };
 
 export const useAlertStore = create<alertStore>((set) => ({
