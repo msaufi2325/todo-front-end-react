@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MyTodo from "./MyTodo";
-import { useJwtStore } from "../store";
+import { useAlertStore, useJwtStore } from "../store";
 import Input from "./form/Input";
+import AlertMessage from "./Alert";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
@@ -65,6 +66,11 @@ function Login() {
     
   };
 
+  const alertTitle = useAlertStore((state) => state.alertTitle);
+  const alertMessage = useAlertStore((state) => state.alertMessage);
+  const alertClass = useAlertStore((state) => state.alertClass);
+
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -74,6 +80,9 @@ function Login() {
         <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in
         </h2>
+        <div className="py-1 col-span-10">
+          <AlertMessage title={alertTitle} message={alertMessage} alertClass={alertClass}/>
+        </div>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
