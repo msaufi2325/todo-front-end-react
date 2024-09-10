@@ -16,9 +16,6 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const alertTitle = useAlertStore((state) => state.alertTitle);
-  const alertMessage = useAlertStore((state) => state.alertMessage);
-  const alertClass = useAlertStore((state) => state.alertClass);
   const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
   const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
   const setAlertClass = useAlertStore((state) => state.setAlertClass);
@@ -87,11 +84,7 @@ function Login() {
           Sign in
         </h2>
         <div className="py-1 col-span-10">
-          <AlertMessage
-            title={alertTitle}
-            message={alertMessage}
-            alertClass={alertClass}
-          />
+          <AlertMessage />
         </div>
       </div>
 
