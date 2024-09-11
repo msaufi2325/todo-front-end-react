@@ -4,27 +4,40 @@ import { useJwtStore } from ".././store";
 
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
-  
+  const setJWTToken = useJwtStore((state) => state.setLoginJwtToken);
+
   const [todos, setTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
     if (jwtToken === "") {
-      return;
+      fetch("http://localhost:8081/refresh", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.access_token) {
+            setJWTToken(data.access_token);
+          }
+        })
+        .catch((error) => {
+          console.log("user is not logged in", error);
+        });
+    } else {
+      fetch("http://localhost:8081/todos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setTodos(data))
+        .catch((error) => console.error(error));
     }
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    const requestOptions = {
-      method: "GET",
-      headers: headers,
-    }
-
-    fetch("http://localhost:8081/todos", requestOptions)
-      .then((response) => response.json())
-      .then((data) => setTodos(data))
-      .catch((error) => console.error(error));
-
-  }, [jwtToken]);
+  }, [jwtToken, setJWTToken, setTodos]);
 
   function setCompleted(id: number, is_completed: boolean) {
     setTodos((prevTodos) =>
@@ -51,16 +64,12 @@ export default function useTodos() {
   }
 
   function deleteTodo(id: number) {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo
-      .id !== id)
-    );
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
 
   function onUpdate(updatedTodo: Todo) {
     setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === updatedTodo.id ? updatedTodo : todo
-      )
+      prevTodos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
     );
   }
 
@@ -81,7 +90,7 @@ export default function useTodos() {
     setNewTodo(newTodoInit);
   }
 
-  function addTodo (newTodo: Todo) {
+  function addTodo(newTodo: Todo) {
     resetNewTodo();
     setTodos((prevTodos) => [
       ...prevTodos,
@@ -96,7 +105,7 @@ export default function useTodos() {
         created_at: newTodo.created_at,
         updated_at: newTodo.updated_at,
         user_id: newTodo.user_id,
-      }
+      },
     ]);
   }
 
@@ -109,5 +118,5 @@ export default function useTodos() {
     onUpdate,
     addTodo,
     newTodo,
-  }
+  };
 }
