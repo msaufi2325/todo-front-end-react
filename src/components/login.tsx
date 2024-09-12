@@ -4,6 +4,7 @@ import MyTodo from "./MyTodo";
 import { useAlertStore, useJwtStore } from "../store";
 import Input from "./form/Input";
 import AlertMessage from "./Alert";
+import useTodos from "../hooks/useTodos";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
@@ -11,6 +12,8 @@ function Login() {
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const { toggleRefresh } = useTodos();
 
   const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
 
@@ -60,6 +63,7 @@ function Login() {
           } else {
             setLoginJwtToken(data.access_token);
             setAlertClass("none");
+            toggleRefresh(true);
             navigate("/");
           }
         })

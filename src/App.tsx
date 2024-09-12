@@ -13,7 +13,7 @@ import AlertMessage from "./components/Alert";
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
 
-  const { logout, toggleRefresh, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
+  const { logout, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -77,14 +77,6 @@ function App() {
           <Link to="/" onClick={resetTodos}>
             <MyTodo />
           </Link>
-          <button>
-            <span
-              className="bg-gray-500 hover:bg-gray-800 text-white p-1 rounded-md"
-              onClick={toggleRefresh}
-            >
-              Refresh
-            </span>
-          </button>
           {jwtToken !== "" && (
             <>
               {!showDeleted && (
@@ -104,6 +96,9 @@ function App() {
               </button>
             </>
           )}
+        </div>
+        <div className="py-1 col-span-10">
+          <AlertMessage />
         </div>
         {jwtToken !== "" && (
           <TodoRemove
@@ -253,9 +248,7 @@ function App() {
             />
           </>
         )}
-        <div className="py-1 col-span-10">
-          <AlertMessage />
-        </div>
+        
       </div>
     </main>
   );

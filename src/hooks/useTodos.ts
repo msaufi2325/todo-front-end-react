@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Todo } from "../types/todo";
-import { useJwtStore } from ".././store";
+import { useAlertStore, useJwtStore } from ".././store";
 
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -8,8 +8,58 @@ export default function useTodos() {
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const [ticking, setTicking] = useState<boolean>(false);
   const [tickInterval, setTickInterval] = useState<number>();
+
+  const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
+  const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
+  const setAlertClass = useAlertStore((state) => state.setAlertClass);
+
+
+  const toggleRefresh = useCallback(
+    (status: boolean) => {
+      console.log("clicked");
+
+      if (status) {
+        console.log("turning on ticking");
+        const i = setInterval(() => {
+          console.log("this will run every second");
+          
+          fetch("http://localhost:8081/refresh", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.access_token) {
+                setJWTToken(data.access_token);
+              } else if (data.error) {
+                console.log("user is not logged in");
+                setAlertTitle("Error");
+                setAlertMessage(data.message);
+                setAlertClass("alert-danger");
+              }
+            })
+            .catch((error) => {
+              console.log("user is not logged in");
+              setAlertTitle("Error");
+              setAlertMessage(error.message);
+              setAlertClass("alert-danger");
+            });
+        }, 1000);
+        setTickInterval(i);
+        console.log("setting tick interval to", i);
+      } else {
+        console.log("turning off ticking");
+        console.log("turning off tickInterval", tickInterval);
+        setTickInterval(undefined);
+        clearInterval(tickInterval);
+      }
+    },
+    [tickInterval, setJWTToken, setAlertTitle, setAlertMessage, setAlertClass]
+  );
 
   useEffect(() => {
     if (jwtToken === "") {
@@ -24,10 +74,20 @@ export default function useTodos() {
         .then((data) => {
           if (data.access_token) {
             setJWTToken(data.access_token);
+            toggleRefresh(true);
+          } else if (data.error) {
+            console.log("user is not logged in");
+            setAlertTitle("Error");
+            setAlertMessage(data.message);
+            setAlertClass("alert-danger");
           }
         })
         .catch((error) => {
-          console.log("user is not logged in", error);
+          console.log("user is not logged in");
+          setAlertTitle("Error");
+          setAlertMessage(error.message);
+          setAlertClass("alert-danger");
+
         });
     } else {
       fetch("http://localhost:8081/todos", {
@@ -40,7 +100,7 @@ export default function useTodos() {
         .then((data) => setTodos(data))
         .catch((error) => console.error(error));
     }
-  }, [jwtToken, setJWTToken, setTodos]);
+  }, [jwtToken, toggleRefresh, setJWTToken, setTodos]);
 
   function logout() {
     fetch("http://localhost:8081/logout", {
@@ -53,28 +113,9 @@ export default function useTodos() {
       .finally(() => {
         setJWTToken("");
         setTodos([]);
+        toggleRefresh(false);
       });
   }
-
-  const toggleRefresh = () => {
-    console.log("clicked");
-
-    if (!ticking) {
-      console.log("turning on ticking");
-      const i = setInterval(() => {
-        console.log("this will run every second");
-      }, 1000);
-      setTickInterval(i);
-      console.log("setting tick interval to", i);
-      setTicking(true);
-    } else {
-      console.log("turning off ticking");
-      console.log("turning off tickInterval", tickInterval);
-      setTickInterval(undefined);
-      clearInterval(tickInterval);
-      setTicking(false);
-    }
-  };
 
   function setCompleted(id: number, is_completed: boolean) {
     setTodos((prevTodos) =>
