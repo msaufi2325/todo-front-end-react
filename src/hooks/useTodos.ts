@@ -8,6 +8,9 @@ export default function useTodos() {
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  const [ticking, setTicking] = useState<boolean>(false);
+  const [tickInterval, setTickInterval] = useState<number>();
+
   useEffect(() => {
     if (jwtToken === "") {
       fetch("http://localhost:8081/refresh", {
@@ -50,8 +53,28 @@ export default function useTodos() {
       .finally(() => {
         setJWTToken("");
         setTodos([]);
-      })
+      });
   }
+
+  const toggleRefresh = () => {
+    console.log("clicked");
+
+    if (!ticking) {
+      console.log("turning on ticking");
+      const i = setInterval(() => {
+        console.log("this will run every second");
+      }, 1000);
+      setTickInterval(i);
+      console.log("setting tick interval to", i);
+      setTicking(true);
+    } else {
+      console.log("turning off ticking");
+      console.log("turning off tickInterval", tickInterval);
+      setTickInterval(undefined);
+      clearInterval(tickInterval);
+      setTicking(false);
+    }
+  };
 
   function setCompleted(id: number, is_completed: boolean) {
     setTodos((prevTodos) =>
@@ -125,6 +148,7 @@ export default function useTodos() {
 
   return {
     logout,
+    toggleRefresh,
     todos,
     setCompleted,
     setRemoved,

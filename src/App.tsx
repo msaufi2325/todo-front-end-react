@@ -13,7 +13,7 @@ import AlertMessage from "./components/Alert";
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
 
-  const { logout, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
+  const { logout, toggleRefresh, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -77,12 +77,19 @@ function App() {
           <Link to="/" onClick={resetTodos}>
             <MyTodo />
           </Link>
-
+          <button>
+            <span
+              className="bg-gray-500 hover:bg-gray-800 text-white p-1 rounded-md"
+              onClick={toggleRefresh}
+            >
+              Refresh
+            </span>
+          </button>
           {jwtToken !== "" && (
             <>
               {!showDeleted && (
                 <h1 className="p-3">
-                  <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500" >
+                  <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500">
                     <TodoModal
                       todo={newTodo}
                       title="Add New"
@@ -109,35 +116,65 @@ function App() {
           <div className="flex items-center">
             <button onClick={() => setSelectedCategory(null)}>
               <h2 className="font-semibold text-l p-1">
-                <span className={`px-1 rounded-md ${selectedCategory === null ? "bg-gray-500 text-white" : "bg-gray-200 hover:bg-gray-500"}`}>
+                <span
+                  className={`px-1 rounded-md ${
+                    selectedCategory === null
+                      ? "bg-gray-500 text-white"
+                      : "bg-gray-200 hover:bg-gray-500"
+                  }`}
+                >
                   Category:
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("work")}>
               <h2 className="font-semibold text-l p-1">
-                <span className={`px-1 rounded-md ${selectedCategory === "work" ? "bg-purple-500 text-white" : "bg-purple-200 hover:bg-purple-500"}`}>
+                <span
+                  className={`px-1 rounded-md ${
+                    selectedCategory === "work"
+                      ? "bg-purple-500 text-white"
+                      : "bg-purple-200 hover:bg-purple-500"
+                  }`}
+                >
                   Work
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("home")}>
               <h2 className="font-semibold text-l p-1">
-                <span className={`px-1 rounded-md ${selectedCategory === "home" ? "bg-green-500 text-white" : "bg-green-200 hover:bg-green-500"}`}>
+                <span
+                  className={`px-1 rounded-md ${
+                    selectedCategory === "home"
+                      ? "bg-green-500 text-white"
+                      : "bg-green-200 hover:bg-green-500"
+                  }`}
+                >
                   Home
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("hobby")}>
               <h2 className="font-semibold text-l p-1">
-                <span className={`px-1 rounded-md ${selectedCategory === "hobby" ? "bg-blue-500 text-white" : "bg-blue-200 hover:bg-blue-500"}`}>
+                <span
+                  className={`px-1 rounded-md ${
+                    selectedCategory === "hobby"
+                      ? "bg-blue-500 text-white"
+                      : "bg-blue-200 hover:bg-blue-500"
+                  }`}
+                >
                   Hobby
                 </span>
               </h2>
             </button>
             <button onClick={() => setSelectedCategory("others")}>
               <h2 className="font-semibold text-l p-1">
-                <span className={`px-1 rounded-md ${selectedCategory === "others" ? "bg-teal-500 text-white" : "bg-teal-200 hover:bg-teal-500"}`}>
+                <span
+                  className={`px-1 rounded-md ${
+                    selectedCategory === "others"
+                      ? "bg-teal-500 text-white"
+                      : "bg-teal-200 hover:bg-teal-500"
+                  }`}
+                >
                   Others
                 </span>
               </h2>
@@ -156,28 +193,52 @@ function App() {
             <div className="flex items-center">
               <button onClick={() => setSelectedPriority(null)}>
                 <h2 className="font-semibold text-l p-1">
-                  <span className={`px-1 rounded-md ${selectedPriority === null ? "bg-gray-500 text-white" : "bg-gray-200 hover:bg-gray-500"}`}>
+                  <span
+                    className={`px-1 rounded-md ${
+                      selectedPriority === null
+                        ? "bg-gray-500 text-white"
+                        : "bg-gray-200 hover:bg-gray-500"
+                    }`}
+                  >
                     Priority:
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("low")}>
                 <h2 className="font-semibold text-l p-1">
-                  <span className={`px-1 rounded-md ${selectedPriority === "low" ? "bg-yellow-500 text-white" : "bg-yellow-200 hover:bg-yellow-500"}`}>
+                  <span
+                    className={`px-1 rounded-md ${
+                      selectedPriority === "low"
+                        ? "bg-yellow-500 text-white"
+                        : "bg-yellow-200 hover:bg-yellow-500"
+                    }`}
+                  >
                     Low
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("medium")}>
                 <h2 className="font-semibold text-l p-1">
-                  <span className={`px-1 rounded-md ${selectedPriority === "medium" ? "bg-orange-500 text-white" : "bg-orange-200 hover:bg-orange-500"}`}>
+                  <span
+                    className={`px-1 rounded-md ${
+                      selectedPriority === "medium"
+                        ? "bg-orange-500 text-white"
+                        : "bg-orange-200 hover:bg-orange-500"
+                    }`}
+                  >
                     Medium
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("high")}>
                 <h2 className="font-semibold text-l p-1">
-                  <span className={`px-1 rounded-md ${selectedPriority === "high" ? "bg-red-500 text-white" : "bg-red-200 hover:bg-red-500"}`}>
+                  <span
+                    className={`px-1 rounded-md ${
+                      selectedPriority === "high"
+                        ? "bg-red-500 text-white"
+                        : "bg-red-200 hover:bg-red-500"
+                    }`}
+                  >
                     High
                   </span>
                 </h2>
