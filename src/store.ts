@@ -8,11 +8,13 @@ type jwtStore = {
 };
 
 export const useJwtStore = create<jwtStore>((set) => ({
-  jwtToken: "",
+  jwtToken: localStorage.getItem('jwtToken') || "",
   setLoginJwtToken: (jwtToken: string) => {
-    set((state) => ({ jwtToken: state.jwtToken = jwtToken}));
+    localStorage.setItem('jwtToken', jwtToken);
+    set((state) => ({ jwtToken: state.jwtToken = jwtToken }));
   },
   setLogoutJwtToken: () => {
+    localStorage.removeItem('jwtToken');
     set((state) => ({ jwtToken: state.jwtToken = "" }));
   },
 }));
