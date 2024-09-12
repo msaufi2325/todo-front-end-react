@@ -39,6 +39,20 @@ export default function useTodos() {
     }
   }, [jwtToken, setJWTToken, setTodos]);
 
+  function logout() {
+    fetch("http://localhost:8081/logout", {
+      method: "GET",
+      credentials: "include",
+    })
+      .catch((error) => {
+        console.log("error logging out", error);
+      })
+      .finally(() => {
+        setJWTToken("");
+        setTodos([]);
+      })
+  }
+
   function setCompleted(id: number, is_completed: boolean) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
@@ -110,6 +124,7 @@ export default function useTodos() {
   }
 
   return {
+    logout,
     todos,
     setCompleted,
     setRemoved,

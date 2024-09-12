@@ -12,9 +12,8 @@ import AlertMessage from "./components/Alert";
 
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
-  const setLogoutJwtToken = useJwtStore((state) => state.setLogoutJwtToken);
 
-  const { todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
+  const { logout, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -43,6 +42,11 @@ function App() {
     resetFilter();
     useShowDeletedStore.getState().setShowDeleted(true)
   };
+
+  const logoutHandler = () => {
+    logout();
+    resetTodos();
+  }
   
   return (
     <main className="container py-10 w-full md:w-1/2 mx-auto overflow-y-auto">
@@ -62,7 +66,7 @@ function App() {
               </Link>
             </div>
           ) : (
-            <button className="pr-7" onClick={setLogoutJwtToken}>
+            <button className="pr-7" onClick={logoutHandler}>
               <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md">
                 Logout
               </span>
