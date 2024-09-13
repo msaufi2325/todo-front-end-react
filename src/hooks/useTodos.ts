@@ -26,9 +26,6 @@ export default function useTodos() {
           
           fetch("http://localhost:8081/refresh", {
             method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
             credentials: "include",
           })
             .then((response) => response.json())
@@ -65,9 +62,6 @@ export default function useTodos() {
     if (jwtToken === "") {
       fetch("http://localhost:8081/refresh", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
       })
         .then((response) => response.json())
@@ -100,7 +94,7 @@ export default function useTodos() {
         .then((data) => setTodos(data))
         .catch((error) => console.error(error));
     }
-  }, [jwtToken, toggleRefresh, setJWTToken, setTodos]);
+  }, [jwtToken, toggleRefresh, setJWTToken, setTodos, setAlertMessage, setAlertTitle, setAlertClass]);
 
   function logout() {
     fetch("http://localhost:8081/logout", {
