@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Todo } from "../types/todo";
-import { useAlertStore, useJwtStore } from ".././store";
+import { useJwtStore } from ".././store";
 
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
@@ -10,9 +10,9 @@ export default function useTodos() {
 
   const [tickInterval, setTickInterval] = useState<number>();
 
-  const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
-  const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
-  const setAlertClass = useAlertStore((state) => state.setAlertClass);
+  // const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
+  // const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
+  // const setAlertClass = useAlertStore((state) => state.setAlertClass);
 
 
   const toggleRefresh = useCallback(
@@ -32,18 +32,10 @@ export default function useTodos() {
             .then((data) => {
               if (data.access_token) {
                 setJWTToken(data.access_token);
-              } else if (data.error) {
-                console.log("user is not logged in");
-                setAlertTitle("Error");
-                setAlertMessage(data.message);
-                setAlertClass("alert-danger");
               }
             })
             .catch((error) => {
-              console.log("user is not logged in");
-              setAlertTitle("Error");
-              setAlertMessage(error.message);
-              setAlertClass("alert-danger");
+              console.log("user is not logged in", error);
             });
         }, 1000);
         setTickInterval(i);
@@ -55,7 +47,7 @@ export default function useTodos() {
         clearInterval(tickInterval);
       }
     },
-    [tickInterval, setJWTToken, setAlertTitle, setAlertMessage, setAlertClass]
+    [tickInterval, setJWTToken]
   );
 
   useEffect(() => {
@@ -69,19 +61,10 @@ export default function useTodos() {
           if (data.access_token) {
             setJWTToken(data.access_token);
             toggleRefresh(true);
-          } else if (data.error) {
-            console.log("user is not logged in");
-            setAlertTitle("Error");
-            setAlertMessage(data.message);
-            setAlertClass("alert-danger");
           }
         })
         .catch((error) => {
-          console.log("user is not logged in");
-          setAlertTitle("Error");
-          setAlertMessage(error.message);
-          setAlertClass("alert-danger");
-
+          console.log("user is not logged in", error);
         });
     } else {
       fetch("http://localhost:8081/todos", {
@@ -94,7 +77,7 @@ export default function useTodos() {
         .then((data) => setTodos(data))
         .catch((error) => console.error(error));
     }
-  }, [jwtToken, toggleRefresh, setJWTToken, setTodos, setAlertMessage, setAlertTitle, setAlertClass]);
+  }, [jwtToken, toggleRefresh, setJWTToken, setTodos]);
 
   function logout() {
     fetch("http://localhost:8081/logout", {
