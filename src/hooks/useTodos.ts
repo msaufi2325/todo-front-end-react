@@ -48,10 +48,11 @@ export default function useTodos() {
   useEffect(() => {
     if (jwtToken !== "") {
       console.log("fetching todos");
-      fetch("http://localhost:8081/todos", {
+      fetch("http://localhost:8081/todos/all", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${jwtToken}`,
         },
       })
         .then((response) => response.json())
