@@ -29,8 +29,8 @@ export default function useTodos() {
                 setJWTToken(data.access_token);
               }
             })
-            .catch((error) => {
-              console.log("user is not logged in", error);
+            .catch(() => {
+              console.log("user is not logged in");
             });
         }, 60000);
         setTickInterval(i);
@@ -76,8 +76,8 @@ export default function useTodos() {
             toggleRefresh(true);
           }
         })
-        .catch((error) => {
-          console.log("user is not logged in", error);
+        .catch(() => {
+          console.log("user is not logged in");
         });
     } 
   }, [jwtToken, setJWTToken, toggleRefresh]);
