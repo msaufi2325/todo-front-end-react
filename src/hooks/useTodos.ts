@@ -9,12 +9,7 @@ export default function useTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const [tickInterval, setTickInterval] = useState<number>();
-
-  // const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
-  // const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
-  // const setAlertClass = useAlertStore((state) => state.setAlertClass);
-
-
+  
   const toggleRefresh = useCallback(
     (status: boolean) => {
       console.log("clicked");
@@ -22,7 +17,7 @@ export default function useTodos() {
       if (status) {
         console.log("turning on ticking");
         const i = setInterval(() => {
-          console.log("this will run every second");
+          // TODO: fix refresh token does not work on page reload
           
           fetch("http://localhost:8081/refresh", {
             method: "GET",
@@ -37,7 +32,7 @@ export default function useTodos() {
             .catch((error) => {
               console.log("user is not logged in", error);
             });
-        }, 1000);
+        }, 60000);
         setTickInterval(i);
         console.log("setting tick interval to", i);
       } else {
@@ -51,7 +46,25 @@ export default function useTodos() {
   );
 
   useEffect(() => {
+    if (jwtToken !== "") {
+      console.log("fetching todos");
+      fetch("http://localhost:8081/todos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setTodos(data);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [jwtToken, setTodos]);
+
+  useEffect(() => {
     if (jwtToken === "") {
+      console.log("fetch refresh token");
       fetch("http://localhost:8081/refresh", {
         method: "GET",
         credentials: "include",
@@ -66,18 +79,8 @@ export default function useTodos() {
         .catch((error) => {
           console.log("user is not logged in", error);
         });
-    } else {
-      fetch("http://localhost:8081/todos", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => setTodos(data))
-        .catch((error) => console.error(error));
-    }
-  }, [jwtToken, toggleRefresh, setJWTToken, setTodos]);
+    } 
+  }, [jwtToken, setJWTToken, toggleRefresh]);
 
   function logout() {
     fetch("http://localhost:8081/logout", {
