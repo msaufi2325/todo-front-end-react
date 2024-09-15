@@ -13,7 +13,7 @@ import AlertMessage from "./components/Alert";
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
 
-  const { logout, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, editTodo, addTodo, newTodo } = useTodos();
+  const { logout, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, editTodo, newTodo } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -85,7 +85,7 @@ function App() {
                     <TodoModal
                       todo={newTodo}
                       title="Add New"
-                      onUpdate={addTodo}
+                      onUpdate={editTodo}
                     />
                   </span>
                 </h1>

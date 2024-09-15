@@ -61,6 +61,7 @@ export default function useTodos() {
         .then((response) => response.json())
         .then((data) => {
           setTodos(data);
+          toggleRefresh(true);
         })
         .catch((error) => {
           console.error(error);
@@ -155,7 +156,7 @@ export default function useTodos() {
   async function editTodo (todo: Todo) {
     resetNewTodo();
 
-    let method = <string>"PUT";
+    let method = "PUT";
     if (todo.id > 0) {
       method = "PATCH";
     }
@@ -178,7 +179,7 @@ export default function useTodos() {
             onUpdate(todo);
           } else if (method === "PUT") {
             addTodo({
-              id : data.id,
+              id : data.data["id"],
               title : todo.title,
               description : todo.description,
               category : todo.category,
@@ -187,7 +188,7 @@ export default function useTodos() {
               is_removed : todo.is_removed,
               created_at : todo.created_at,
               updated_at : todo.updated_at,
-              user_id : data.user_id,
+              user_id : data.data["user_id"],
             })
           }
         }
@@ -257,7 +258,6 @@ export default function useTodos() {
     deleteTodo,
     onUpdate,
     editTodo,
-    addTodo,
     newTodo,
   };
 }
