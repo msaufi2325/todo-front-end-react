@@ -40,9 +40,11 @@ export const useUserStore = create<userStore>((set) => ({
     set((state) => ({ userName: state.userName = "" }));
   },
   setLoginUserID: (userID: number) => {
+    localStorage.setItem('userID', userID.toString());
     set((state) => ({ userID: state.userID = userID }));
   },
   setLogoutUserID: () => {
+    localStorage.removeItem('userID');
     set((state) => ({ userID: state.userID = 0 }));
   },
 }));

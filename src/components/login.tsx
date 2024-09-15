@@ -67,7 +67,7 @@ function Login() {
             setLoginJwtToken(data.access_token);
             setLoginUserName(data.username);
             console.log(data.user_id);
-            setLoginUserId(data.user_id);
+            setLoginUserId(parseInt(data.user_id, 10));
             setAlertClass("none");
             toggleRefresh(true);
             navigate("/");

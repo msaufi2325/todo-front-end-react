@@ -206,7 +206,7 @@ export default function useTodos() {
               is_removed : todo.is_removed,
               created_at : todo.created_at,
               updated_at : todo.updated_at,
-              user_id : data.data["user_id"],
+              user_id : todo.user_id,
             })
           }
         }
