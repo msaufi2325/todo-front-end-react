@@ -133,7 +133,7 @@ export default function useTodos() {
   }
 
   const newTodoInit: Todo = {
-    id: todos.length,
+    id: 0,
     title: "",
     description: "",
     category: "others",
@@ -144,7 +144,9 @@ export default function useTodos() {
     updated_at: new Date().toISOString(),
     user_id: 1,
   };
+
   const [newTodo, setNewTodo] = useState<Todo>(newTodoInit);
+
   function resetNewTodo() {
     setNewTodo(newTodoInit);
   }
@@ -154,7 +156,7 @@ export default function useTodos() {
     setTodos((prevTodos) => [
       ...prevTodos,
       {
-        id: Math.max(...prevTodos.map((todo) => todo.id)) + 1,
+        id: newTodo.id,
         title: newTodo.title,
         description: newTodo.description,
         category: newTodo.category,
@@ -168,6 +170,56 @@ export default function useTodos() {
     ]);
   }
 
+  const editTodo = (todo: Todo) => {
+    resetNewTodo();
+
+    let method = <string>"PUT";
+    if (todo.id > 0) {
+      method = "PATCH";
+    }
+
+    fetch(`http://localhost:8081/todos/${todo.id}`, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${jwtToken}`,
+      },
+      credentials: "include",
+      body: JSON.stringify(todo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          if (method === "PATCH") {
+            onUpdate(todo);
+          } else if (method === "PUT") {
+            addTodo({
+              id : data.id,
+              title : todo.title,
+              description : todo.description,
+              category : todo.category,
+              priority : todo.priority,
+              is_completed : todo.is_completed,
+              is_removed : todo.is_removed,
+              created_at : todo.created_at,
+              updated_at : todo.updated_at,
+              user_id : data.user_id,
+            })
+          }
+        }
+      })
+      .catch((error) => {
+        if (method === "PATCH") {
+          console.error("error updating todo", error);
+        } else if (method === "PUT") {
+          console.error("error adding todo", error);
+        }
+      })
+    
+  }
+
   return {
     logout,
     toggleRefresh,
@@ -177,6 +229,7 @@ export default function useTodos() {
     deleteAllCompleted,
     deleteTodo,
     onUpdate,
+    editTodo,
     addTodo,
     newTodo,
   };

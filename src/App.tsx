@@ -13,7 +13,7 @@ import AlertMessage from "./components/Alert";
 function App() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
 
-  const { logout, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, onUpdate, addTodo, newTodo } = useTodos();
+  const { logout, todos, setCompleted, setRemoved, deleteAllCompleted, deleteTodo, editTodo, addTodo, newTodo } = useTodos();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
 
@@ -244,7 +244,7 @@ function App() {
               onCompletedChange={setCompleted}
               onRemovedChange={setRemoved}
               onDelete={deleteTodo}
-              onUpdate={onUpdate}
+              onUpdate={editTodo}
             />
           </>
         )}
