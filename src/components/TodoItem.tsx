@@ -1,4 +1,4 @@
-import { Pencil, Trash2, Undo2 } from "lucide-react";
+import { Pencil, Trash2, Undo2, FileX } from "lucide-react";
 import { Todo } from "../types/todo";
 import SpanColor from "./SpanColor";
 import { useShowDeletedStore } from "../store";
@@ -51,7 +51,7 @@ export default function TodoItem({ todo, onCompletedChange, onRemovedChange, onD
         {showDeleted ? (
           <Undo2 size={20} className="text-gray-500" />
         ) : (
-          <Trash2 size={20} className="text-gray-500" />
+          <FileX size={20} className="text-gray-500" />
         )}
       </button>
       {showDeleted && (

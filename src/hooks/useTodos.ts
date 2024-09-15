@@ -1,10 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { Todo } from "../types/todo";
 import { useJwtStore } from ".././store";
+import { useNavigate } from "react-router-dom";
 
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
   const setJWTToken = useJwtStore((state) => state.setLoginJwtToken);
+
+  const navigate = useNavigate();
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
@@ -59,9 +62,12 @@ export default function useTodos() {
         .then((data) => {
           setTodos(data);
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          console.error(error);
+          navigate("/login");
+        });
     }
-  }, [jwtToken, setTodos]);
+  }, [jwtToken, setTodos, navigate]);
 
   useEffect(() => {
     if (jwtToken === "") {
