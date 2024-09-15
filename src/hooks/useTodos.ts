@@ -210,32 +210,25 @@ export default function useTodos() {
     );
   }
 
-  function setRemove(id: number) {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, is_removed: !todo.is_removed } : todo
-      )
-    );
-  }
-
   async function setRemoved(id: number) {
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (todoToUpdate) {
       try {
         await editTodo({ ...todoToUpdate, is_removed: !todoToUpdate.is_removed });
+        setTodos((prevTodos) =>
+          prevTodos.map((todo) =>
+            todo.id === id ? { ...todo, is_removed: todo.is_removed } : todo
+          )
+        );
       } catch (error) {
         console.error("Failed to update todo:", error);
       }
     }
-
-    setRemove(id);
   }
 
   async function setCompleted(id: number, is_completed: boolean) {
-    console.log("setting completed todo:", id);
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (todoToUpdate) {
-      console.log("updating todo:", todoToUpdate);
       try {
         await editTodo({ ...todoToUpdate, is_completed });
       } catch (error) {
