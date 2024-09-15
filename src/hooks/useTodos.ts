@@ -202,14 +202,6 @@ export default function useTodos() {
         }
       })
   }
-  function setComplete(id: number, is_completed: boolean) {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, is_completed } : todo
-      )
-    );
-  }
-
   async function setRemoved(id: number) {
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (todoToUpdate) {
@@ -231,12 +223,15 @@ export default function useTodos() {
     if (todoToUpdate) {
       try {
         await editTodo({ ...todoToUpdate, is_completed });
+        setTodos((prevTodos) =>
+          prevTodos.map((todo) =>
+            todo.id === id ? { ...todo, is_completed } : todo
+          )
+        );
       } catch (error) {
         console.error("Failed to update todo:", error);
       }
     }
-
-    setComplete(id, is_completed);
   }
 
   return {
