@@ -104,14 +104,6 @@ export default function useTodos() {
       });
   }
 
-  function deleteAllCompleted() {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.is_completed ? { ...todo, is_removed: true } : todo
-      )
-    );
-  }
-
   function deleteTodo(id: number) {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
@@ -238,6 +230,21 @@ export default function useTodos() {
         console.error("Failed to update todo:", error);
       }
     }
+  }
+
+  function deleteAllCompleted() {
+    const completedTodos = todos.filter((todo) => todo.is_completed);
+    completedTodos.forEach((todo) => {
+      editTodo({
+        ...todo,
+        is_removed: true,
+      });
+    });
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.is_completed ? { ...todo, is_removed: true } : todo
+      )
+    );
   }
 
   return {
