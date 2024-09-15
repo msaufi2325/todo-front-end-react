@@ -98,22 +98,6 @@ export default function useTodos() {
       });
   }
 
-  function setCompleted(id: number, is_completed: boolean) {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, is_completed } : todo
-      )
-    );
-  }
-
-  function setRemoved(id: number) {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, is_removed: !todo.is_removed } : todo
-      )
-    );
-  }
-
   function deleteAllCompleted() {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
@@ -170,7 +154,7 @@ export default function useTodos() {
     ]);
   }
 
-  const editTodo = (todo: Todo) => {
+  async function editTodo (todo: Todo) {
     resetNewTodo();
 
     let method = <string>"PUT";
@@ -178,7 +162,7 @@ export default function useTodos() {
       method = "PATCH";
     }
 
-    fetch(`http://localhost:8081/todos/${todo.id}`, {
+    await fetch(`http://localhost:8081/todos/${todo.id}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",
@@ -217,7 +201,49 @@ export default function useTodos() {
           console.error("error adding todo", error);
         }
       })
-    
+  }
+  function setComplete(id: number, is_completed: boolean) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, is_completed } : todo
+      )
+    );
+  }
+
+  function setRemove(id: number) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, is_removed: !todo.is_removed } : todo
+      )
+    );
+  }
+
+  async function setRemoved(id: number) {
+    const todoToUpdate = todos.find((todo) => todo.id === id);
+    if (todoToUpdate) {
+      try {
+        await editTodo({ ...todoToUpdate, is_removed: !todoToUpdate.is_removed });
+      } catch (error) {
+        console.error("Failed to update todo:", error);
+      }
+    }
+
+    setRemove(id);
+  }
+
+  async function setCompleted(id: number, is_completed: boolean) {
+    console.log("setting completed todo:", id);
+    const todoToUpdate = todos.find((todo) => todo.id === id);
+    if (todoToUpdate) {
+      console.log("updating todo:", todoToUpdate);
+      try {
+        await editTodo({ ...todoToUpdate, is_completed });
+      } catch (error) {
+        console.error("Failed to update todo:", error);
+      }
+    }
+
+    setComplete(id, is_completed);
   }
 
   return {
