@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { Todo } from "../types/todo";
-import { useJwtStore } from ".././store";
+import { useJwtStore, useUserStore } from ".././store";
 import { useNavigate } from "react-router-dom";
 
 export default function useTodos() {
   const jwtToken = useJwtStore((state) => state.jwtToken);
+  const userIDStore = useUserStore((state) => state.userID);
   const setJWTToken = useJwtStore((state) => state.setLoginJwtToken);
 
   const navigate = useNavigate();
@@ -142,7 +143,7 @@ export default function useTodos() {
     is_removed: false,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
-    user_id: 1,
+    user_id: userIDStore,
   };
 
   const [newTodo, setNewTodo] = useState<Todo>(newTodoInit);
@@ -165,7 +166,7 @@ export default function useTodos() {
         is_removed: newTodo.is_removed,
         created_at: newTodo.created_at,
         updated_at: newTodo.updated_at,
-        user_id: newTodo.user_id,
+        user_id: userIDStore,
       },
     ]);
   }

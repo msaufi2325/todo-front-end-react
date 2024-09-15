@@ -52,7 +52,8 @@ const Register: React.FC = () => {
         password: password
       };
       console.log(payload);
-      setLoginJwtToken("jwtToken");
+
+      
       navigate("/");
     }
     

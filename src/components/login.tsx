@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MyTodo from "./MyTodo";
-import { useAlertStore, useJwtStore } from "../store";
+import { useAlertStore, useJwtStore, useUserStore } from "../store";
 import Input from "./form/Input";
 import AlertMessage from "./Alert";
 import useTodos from "../hooks/useTodos";
@@ -16,6 +16,9 @@ function Login() {
   const { toggleRefresh } = useTodos();
 
   const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
+
+  const setLoginUserName = useUserStore((state) => state.setLoginUserName);
+  const setLoginUserId = useUserStore((state) => state.setLoginUserID);
 
   const navigate = useNavigate();
 
@@ -62,6 +65,9 @@ function Login() {
             setAlertClass("alert-danger");
           } else {
             setLoginJwtToken(data.access_token);
+            setLoginUserName(data.username);
+            console.log(data.user_id);
+            setLoginUserId(data.user_id);
             setAlertClass("none");
             toggleRefresh(true);
             navigate("/");

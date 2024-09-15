@@ -19,6 +19,34 @@ export const useJwtStore = create<jwtStore>((set) => ({
   },
 }));
 
+type userStore = {
+  userName: string;
+  userID: number;
+  setLoginUserName: (user: string) => void;
+  setLogoutUserName: () => void;
+  setLoginUserID: (userID: number) => void;
+  setLogoutUserID: () => void;
+};
+
+export const useUserStore = create<userStore>((set) => ({
+  userName: localStorage.getItem('userName') || "",
+  userID: 0,
+  setLoginUserName: (userName: string) => {
+    localStorage.setItem('userName', userName);
+    set((state) => ({ userName: state.userName = userName }));
+  },
+  setLogoutUserName: () => {
+    localStorage.removeItem('userName');
+    set((state) => ({ userName: state.userName = "" }));
+  },
+  setLoginUserID: (userID: number) => {
+    set((state) => ({ userID: state.userID = userID }));
+  },
+  setLogoutUserID: () => {
+    set((state) => ({ userID: state.userID = 0 }));
+  },
+}));
+
 type showDeletedStore = {
   showDeleted: boolean;
   setShowDeleted: (value: boolean) => void;
