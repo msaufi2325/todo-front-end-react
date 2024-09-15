@@ -105,9 +105,26 @@ export default function useTodos() {
       });
   }
 
-  function deleteTodo(id: number) {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-  }
+  async function deleteTodo(id: number) {
+      await fetch(`http://localhost:8081/todos/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${jwtToken}`,
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            console.log(data.error);
+          } else {
+            setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+          }
+        })
+        .catch((error) => {
+          console.error("error deleting todo", error);
+        });
+    }
 
   function onUpdate(updatedTodo: Todo) {
     setTodos((prevTodos) =>
