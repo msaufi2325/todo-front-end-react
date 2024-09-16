@@ -63,14 +63,13 @@ export default function useTodos() {
         .then((response) => response.json())
         .then((data) => {
           setTodos(data);
-          toggleRefresh(true);
         })
         .catch((error) => {
           console.error(error);
           navigate("/login");
         });
     }
-  }, [jwtToken, setTodos, navigate]);
+  }, [jwtToken, setTodos, navigate, userIDStore]);
 
   useEffect(() => {
     if (jwtToken === "") {
@@ -167,13 +166,14 @@ export default function useTodos() {
         is_removed: newTodo.is_removed,
         created_at: newTodo.created_at,
         updated_at: newTodo.updated_at,
-        user_id: userIDStore,
+        user_id: newTodo.user_id,
       },
     ]);
   }
 
   async function editTodo (todo: Todo) {
     resetNewTodo();
+    console.log(todo.user_id);
 
     let method = "PUT";
     if (todo.id > 0) {

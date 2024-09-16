@@ -10,29 +10,28 @@ interface TodoItemProps {
 }
 
 export default function TodoList({ todos, onCompletedChange, onRemovedChange, onDelete, onUpdate }: TodoItemProps) {
-  if (!todos) {
-    return <p className="text-center text-gray-500">No todos found</p>;
-  }
 
-  const todoSorted = todos.sort((a, b) => {
+
+  const todoSorted = todos?.sort((a, b) => {
     return a.is_completed === b.is_completed ? 0 : a.is_completed ? 1 : -1;
   });
 
   return (
     <>
-      <div className="space-y-2">
-        {todoSorted.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onCompletedChange={onCompletedChange}
-            onRemovedChange={onRemovedChange}
-            onDelete={onDelete}
-            onUpdate={onUpdate}
-          />
-        ))}
-      </div>
-      {todos && (
+      {todos && todos.length > 0 ? (
+        <div className="space-y-2">
+          {todoSorted?.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onCompletedChange={onCompletedChange}
+              onRemovedChange={onRemovedChange}
+              onDelete={onDelete}
+              onUpdate={onUpdate}
+            />
+          ))}
+        </div>
+      ) : (
         <p className="text-center text-gray-500">No todos found</p>
       )}
     </>

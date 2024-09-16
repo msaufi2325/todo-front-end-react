@@ -30,7 +30,7 @@ type userStore = {
 
 export const useUserStore = create<userStore>((set) => ({
   userName: localStorage.getItem('userName') || "",
-  userID: 0,
+  userID: parseInt(localStorage.getItem('userID') || '0', 10),
   setLoginUserName: (userName: string) => {
     localStorage.setItem('userName', userName);
     set((state) => ({ userName: state.userName = userName }));
