@@ -53,11 +53,12 @@ export default function useTodos() {
     if (jwtToken !== "") {
       console.log("fetching todos");
       fetch("http://localhost:8081/todos/all", {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${jwtToken}`,
         },
+        body: JSON.stringify({ user_id: userIDStore }),
       })
         .then((response) => response.json())
         .then((data) => {

@@ -2,7 +2,7 @@ import { Todo } from "../types/todo";
 import TodoItem from "./TodoItem";
 
 interface TodoItemProps {
-  todos: Todo[];
+  todos: Todo[] | null;
   onCompletedChange: (id: number, isCheckedCompleted: boolean) => void;
   onRemovedChange: (id: number) => void;
   onDelete: (id: number) => void;
@@ -10,6 +10,10 @@ interface TodoItemProps {
 }
 
 export default function TodoList({ todos, onCompletedChange, onRemovedChange, onDelete, onUpdate }: TodoItemProps) {
+  if (!todos) {
+    return <p className="text-center text-gray-500">No todos found</p>;
+  }
+
   const todoSorted = todos.sort((a, b) => {
     return a.is_completed === b.is_completed ? 0 : a.is_completed ? 1 : -1;
   });
@@ -28,7 +32,7 @@ export default function TodoList({ todos, onCompletedChange, onRemovedChange, on
           />
         ))}
       </div>
-      {todos.length === 0 && (
+      {todos && (
         <p className="text-center text-gray-500">No todos found</p>
       )}
     </>

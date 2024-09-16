@@ -19,9 +19,9 @@ function App() {
 
   const showDeleted = useShowDeletedStore((state) => state.showDeleted);
 
-  const todosDisplay = todos.filter(todo => todo.is_removed === showDeleted);
+  const todosDisplay = todos?.filter(todo => todo.is_removed === showDeleted) || [];
 
-  const filteredTodos = todosDisplay.filter(todo => {
+  const filteredTodos = todosDisplay?.filter(todo => {
     return (
       (selectedCategory ? todo.category === selectedCategory : true) &&
       (selectedPriority ? todo.priority === selectedPriority : true)
@@ -100,7 +100,7 @@ function App() {
         <div className="py-1 col-span-10">
           <AlertMessage />
         </div>
-        {jwtToken !== "" && (
+        {jwtToken !== "" && todos && (
           <TodoRemove
             todos={filteredTodos}
             deleteAllCompleted={deleteAllCompleted}
@@ -109,72 +109,72 @@ function App() {
         <hr className="mb-3"></hr>
         {jwtToken !== "" ? (
           <div className="flex items-center">
-            <button onClick={() => setSelectedCategory(null)}>
-              <h2 className="font-semibold text-l p-1">
-                <span
-                  className={`px-1 rounded-md ${
-                    selectedCategory === null
-                      ? "bg-gray-500 text-white"
-                      : "bg-gray-200 hover:bg-gray-500"
-                  }`}
-                >
-                  Category:
-                </span>
-              </h2>
-            </button>
-            <button onClick={() => setSelectedCategory("work")}>
-              <h2 className="font-semibold text-l p-1">
-                <span
-                  className={`px-1 rounded-md ${
-                    selectedCategory === "work"
-                      ? "bg-purple-500 text-white"
-                      : "bg-purple-200 hover:bg-purple-500"
-                  }`}
-                >
-                  Work
-                </span>
-              </h2>
-            </button>
-            <button onClick={() => setSelectedCategory("home")}>
-              <h2 className="font-semibold text-l p-1">
-                <span
-                  className={`px-1 rounded-md ${
-                    selectedCategory === "home"
-                      ? "bg-green-500 text-white"
-                      : "bg-green-200 hover:bg-green-500"
-                  }`}
-                >
-                  Home
-                </span>
-              </h2>
-            </button>
-            <button onClick={() => setSelectedCategory("hobby")}>
-              <h2 className="font-semibold text-l p-1">
-                <span
-                  className={`px-1 rounded-md ${
-                    selectedCategory === "hobby"
-                      ? "bg-blue-500 text-white"
-                      : "bg-blue-200 hover:bg-blue-500"
-                  }`}
-                >
-                  Hobby
-                </span>
-              </h2>
-            </button>
-            <button onClick={() => setSelectedCategory("others")}>
-              <h2 className="font-semibold text-l p-1">
-                <span
-                  className={`px-1 rounded-md ${
-                    selectedCategory === "others"
-                      ? "bg-teal-500 text-white"
-                      : "bg-teal-200 hover:bg-teal-500"
-                  }`}
-                >
-                  Others
-                </span>
-              </h2>
-            </button>
-          </div>
+          <button onClick={() => setSelectedCategory(null)}>
+            <h2 className="font-semibold text-l p-1">
+              <span
+                className={`px-1 rounded-md ${
+                  selectedCategory === null
+                    ? "bg-gray-500 text-white"
+                    : "bg-gray-200 hover:bg-gray-500"
+                }`}
+              >
+                Category:
+              </span>
+            </h2>
+          </button>
+          <button onClick={() => setSelectedCategory("work")}>
+            <h2 className="font-semibold text-l p-1">
+              <span
+                className={`px-1 rounded-md ${
+                  selectedCategory === "work"
+                    ? "bg-purple-500 text-white"
+                    : "bg-purple-200 hover:bg-purple-500"
+                }`}
+              >
+                Work
+              </span>
+            </h2>
+          </button>
+          <button onClick={() => setSelectedCategory("home")}>
+            <h2 className="font-semibold text-l p-1">
+              <span
+                className={`px-1 rounded-md ${
+                  selectedCategory === "home"
+                    ? "bg-green-500 text-white"
+                    : "bg-green-200 hover:bg-green-500"
+                }`}
+              >
+                Home
+              </span>
+            </h2>
+          </button>
+          <button onClick={() => setSelectedCategory("hobby")}>
+            <h2 className="font-semibold text-l p-1">
+              <span
+                className={`px-1 rounded-md ${
+                  selectedCategory === "hobby"
+                    ? "bg-blue-500 text-white"
+                    : "bg-blue-200 hover:bg-blue-500"
+                }`}
+              >
+                Hobby
+              </span>
+            </h2>
+          </button>
+          <button onClick={() => setSelectedCategory("others")}>
+            <h2 className="font-semibold text-l p-1">
+              <span
+                className={`px-1 rounded-md ${
+                  selectedCategory === "others"
+                    ? "bg-teal-500 text-white"
+                    : "bg-teal-200 hover:bg-teal-500"
+                }`}
+              >
+                Others
+              </span>
+            </h2>
+          </button>
+        </div>
         ) : (
           <div className="px-5">
             <h2>

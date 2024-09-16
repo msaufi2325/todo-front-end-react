@@ -54,11 +54,12 @@ const Register: React.FC = () => {
     }
 
     if (valid) {
-      fetch("http+//localhost:8081/register", {
+      fetch("http://localhost:8081/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // or "same-origin" or "omit"
         body: JSON.stringify({ username, email, password }),
       })
         .then((response) => response.json())
