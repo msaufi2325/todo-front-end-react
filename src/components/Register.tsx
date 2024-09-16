@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import MyTodo from "./MyTodo";
-import { useJwtStore } from '../store';
+import { useAlertStore, useJwtStore, useUserStore } from '../store';
 import Input from './form/Input';
+import useTodos from '../hooks/useTodos';
 
 
 const Register: React.FC = () => {
@@ -16,8 +17,15 @@ const Register: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const { toggleRefresh } = useTodos();
   const setLoginJwtToken = useJwtStore((state) => state.setLoginJwtToken);
 
+  const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
+  const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
+  const setAlertClass = useAlertStore((state) => state.setAlertClass);
+
+  const setLoginUserName = useUserStore((state) => state.setLoginUserName);
+  const setLoginUserId = useUserStore((state) => state.setLoginUserID);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -46,17 +54,33 @@ const Register: React.FC = () => {
     }
 
     if (valid) {
-      const payload = {
-        username: username,
-        email: email,
-        password: password
-      };
-      console.log(payload);
-
-      
-      navigate("/");
-    }
-    
+      fetch("http+//localhost:8081/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            setAlertTitle("Error");
+            setAlertMessage(data.message)
+            setAlertClass("alert-danger");
+          } else {
+            setLoginJwtToken(data.token);
+            setLoginUserName(data.username);
+            setLoginUserId(parseInt(data.user_id, 10));
+            setAlertClass("none");
+            toggleRefresh(true)
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          setAlertTitle("Error");
+          setAlertMessage(error.message);
+          setAlertClass("alert-danger");
+        });
   };
 
   return (
