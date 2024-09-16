@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Todo } from "../types/todo";
-import { useAlertStore, useJwtStore, useUserStore } from ".././store";
+import { useJwtStore, useUserStore } from ".././store";
 import { useNavigate } from "react-router-dom";
 
 export default function useTodos() {
@@ -10,9 +10,6 @@ export default function useTodos() {
 
   const setUserID = useUserStore((state) => state.setLoginUserID);
   const setUserName = useUserStore((state) => state.setLoginUserName);
-  const userID = useUserStore((state) => state.userID);
-  const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
-  setAlertMessage(`User id: ${userID}`);
 
   const navigate = useNavigate();
 
@@ -163,22 +160,26 @@ export default function useTodos() {
   }
 
   function addTodo(newTodo: Todo) {
-    resetNewTodo();
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      {
-        id: newTodo.id,
-        title: newTodo.title,
-        description: newTodo.description,
-        category: newTodo.category,
-        priority: newTodo.priority,
-        is_completed: newTodo.is_completed,
-        is_removed: newTodo.is_removed,
-        created_at: newTodo.created_at,
-        updated_at: newTodo.updated_at,
-        user_id: newTodo.user_id,
-      },
-    ]);
+    setTodos((prevTodos) => {
+      if (!prevTodos) {
+        prevTodos = [];
+      }
+      return [
+        ...prevTodos,
+        {
+          id: newTodo.id,
+          title: newTodo.title,
+          description: newTodo.description,
+          category: newTodo.category,
+          priority: newTodo.priority,
+          is_completed: newTodo.is_completed,
+          is_removed: newTodo.is_removed,
+          created_at: newTodo.created_at,
+          updated_at: newTodo.updated_at,
+          user_id: newTodo.user_id,
+        },
+      ];
+    });
   }
 
   async function editTodo (todo: Todo) {
