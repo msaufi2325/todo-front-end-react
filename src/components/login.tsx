@@ -20,6 +20,9 @@ function Login() {
   const setLoginUserName = useUserStore((state) => state.setLoginUserName);
   const setLoginUserId = useUserStore((state) => state.setLoginUserID);
 
+  // const loggedUser = useUserStore((state) => state.userName);
+  // const loggedUserID = useUserStore((state) => state.userID);
+
   const navigate = useNavigate();
 
   const setAlertTitle = useAlertStore((state) => state.setAlertTitle);
@@ -68,16 +71,19 @@ function Login() {
             setLoginUserName(data.username);
             console.log(data.user_id);
             setLoginUserId(parseInt(data.user_id, 10));
-            setAlertClass("none");
             toggleRefresh(true);
-            navigate("/");
           }
         })
         .catch((error) => {
           setAlertTitle("Error");
           setAlertMessage(error.message);
           setAlertClass("alert-danger");
-        });
+        })
+        .finally(() => {
+          // setAlertClass("alert-success");
+          // setAlertMessage(`Welcome back ${loggedUser}`);
+          navigate("/");
+        })
     }
   };
 

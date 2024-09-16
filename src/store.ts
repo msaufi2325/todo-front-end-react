@@ -73,7 +73,7 @@ type alertStore = {
 export const useAlertStore = create<alertStore>((set) => ({
   alertTitle: "",
   alertMessage: "",
-  alertClass: "none",
+  alertClass: "alert-danger",
   setAlertTitle: (title: string) => {
     set((state) => ({ alertTitle: state.alertTitle = title }));
   },

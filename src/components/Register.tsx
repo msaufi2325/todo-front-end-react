@@ -27,7 +27,7 @@ const Register: React.FC = () => {
   const setLoginUserName = useUserStore((state) => state.setLoginUserName);
   const setLoginUserId = useUserStore((state) => state.setLoginUserID);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     // Add your registration logic here
     let valid = true;
@@ -54,7 +54,7 @@ const Register: React.FC = () => {
     }
 
     if (valid) {
-      fetch("http://localhost:8081/register", {
+      await fetch("http://localhost:8081/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,18 +69,19 @@ const Register: React.FC = () => {
             setAlertMessage(data.message)
             setAlertClass("alert-danger");
           } else {
-            setLoginJwtToken(data.token);
-            setLoginUserName(data.username);
-            setLoginUserId(parseInt(data.user_id, 10));
-            setAlertClass("none");
+            setLoginJwtToken(data.data["access_token"]);
+            setLoginUserName(data.data["username"]);
+            setLoginUserId(parseInt(data.data["user_id"], 10));
             toggleRefresh(true)
-            navigate("/");
           }
         })
         .catch((error) => {
           setAlertTitle("Error");
           setAlertMessage(error.message);
           setAlertClass("alert-danger");
+        })
+        .finally(() => {
+          navigate("/");
         });
   }
 };
@@ -167,7 +168,7 @@ const Register: React.FC = () => {
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Sign in
+              Sign up
             </button>
           </div>
         </form>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Todo } from "../types/todo";
-import { useJwtStore, useUserStore } from ".././store";
+import { useAlertStore, useJwtStore, useUserStore } from ".././store";
 import { useNavigate } from "react-router-dom";
 
 export default function useTodos() {
@@ -8,11 +8,19 @@ export default function useTodos() {
   const userIDStore = useUserStore((state) => state.userID);
   const setJWTToken = useJwtStore((state) => state.setLoginJwtToken);
 
+  const setUserID = useUserStore((state) => state.setLoginUserID);
+  const setUserName = useUserStore((state) => state.setLoginUserName);
+  const userID = useUserStore((state) => state.userID);
+  const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
+  setAlertMessage(`User id: ${userID}`);
+
   const navigate = useNavigate();
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const [tickInterval, setTickInterval] = useState<number>();
+
+
   
   const toggleRefresh = useCallback(
     (status: boolean) => {
@@ -101,6 +109,8 @@ export default function useTodos() {
       })
       .finally(() => {
         setJWTToken("");
+        setUserID(0);
+        setUserName("");
         setTodos([]);
         toggleRefresh(false);
       });
