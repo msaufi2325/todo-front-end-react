@@ -215,6 +215,7 @@ function App() {
                   href="https://github.com/msaufi2325/todo-front-end-react"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="hover:bg-blue-300 px-3 rounded-md"
                 >
                   Frontend
                 </a>
@@ -223,6 +224,7 @@ function App() {
                   href="https://github.com/msaufi2325/todo-back-end-go"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="hover:bg-blue-300 px-3 rounded-md"
                 >
                   Backend
                 </a>
