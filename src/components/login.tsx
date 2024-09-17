@@ -73,12 +73,14 @@ function Login() {
             console.log(data.user_id);
             setLoginUserId(parseInt(data.user_id, 10));
             toggleRefresh(true);
+            navigate("/");
           }
         })
         .catch((error) => {
           setAlertTitle("Error");
           setAlertMessage(error.message);
           setAlertClass("alert-danger");
+          navigate("/login");
         })
 
     }
