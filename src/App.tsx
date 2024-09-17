@@ -106,6 +106,9 @@ function App() {
           </Link>
           {jwtToken !== "" && (
             <>
+              <button onClick={resetDeleted}>
+                <DeletedTodo />
+              </button>
               {!showDeleted && (
                 <h1 className="p-3">
                   <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500">
@@ -117,10 +120,6 @@ function App() {
                   </span>
                 </h1>
               )}
-
-              <button onClick={resetDeleted}>
-                <DeletedTodo />
-              </button>
             </>
           )}
         </div>
