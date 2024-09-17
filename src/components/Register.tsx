@@ -54,7 +54,7 @@ const Register: React.FC = () => {
     }
 
     if (valid) {
-      await fetch("http://localhost:8081/register", {
+      await fetch(`${process.env.REACT_APP_BACKEND}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

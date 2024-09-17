@@ -15,7 +15,7 @@ export default function useTodos() {
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const [tickInterval, setTickInterval] = useState<number>();
+  const [tickInterval, setTickInterval] = useState<NodeJS.Timeout | undefined>(undefined);
 
 
   
@@ -27,8 +27,8 @@ export default function useTodos() {
         console.log("turning on ticking");
         const i = setInterval(() => {
           // TODO: fix refresh token does not work on page reload
-          
-          fetch("http://localhost:8081/refresh", {
+
+          fetch(`${process.env.REACT_APP_BACKEND}/refresh`, {
             method: "GET",
             credentials: "include",
           })
@@ -44,6 +44,7 @@ export default function useTodos() {
         }, 60000);
         setTickInterval(i);
         console.log("setting tick interval to", i);
+        return () => clearInterval(i);
       } else {
         console.log("turning off ticking");
         console.log("turning off tickInterval", tickInterval);
@@ -56,7 +57,7 @@ export default function useTodos() {
 
   useEffect(() => {
     if (jwtToken !== "") {
-      fetch("http://localhost:8081/todos/all", {
+      fetch(`${process.env.REACT_APP_BACKEND}/todos/all`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +79,7 @@ export default function useTodos() {
   useEffect(() => {
     if (jwtToken === "") {
       console.log("fetch refresh token");
-      fetch("http://localhost:8081/refresh", {
+      fetch(`${process.env.REACT_APP_BACKEND}/refresh`, {
         method: "GET",
         credentials: "include",
       })
@@ -96,7 +97,7 @@ export default function useTodos() {
   }, [jwtToken, setJWTToken, toggleRefresh]);
 
   function logout() {
-    fetch("http://localhost:8081/logout", {
+    fetch(`${process.env.REACT_APP_BACKEND}/logout`, {
       method: "GET",
       credentials: "include",
     })
@@ -113,7 +114,7 @@ export default function useTodos() {
   }
 
   async function deleteTodo(id: number) {
-      await fetch(`http://localhost:8081/todos/${id}`, {
+      await fetch(`${process.env.REACT_APP_BACKEND}/todos/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +191,7 @@ export default function useTodos() {
       method = "PATCH";
     }
 
-    await fetch(`http://localhost:8081/todos/${todo.id}`, {
+    await fetch(`${process.env.REACT_APP_BACKEND}/todos/${todo.id}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",

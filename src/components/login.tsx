@@ -49,7 +49,7 @@ function Login() {
     }
 
     if (valid) {
-      fetch("http://localhost:8081/authenticate", {
+      fetch(`${process.env.REACT_APP_BACKEND}/authenticate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
