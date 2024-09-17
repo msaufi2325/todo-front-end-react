@@ -209,7 +209,7 @@ function App() {
             </h2>
             <hr className="mt-14 my-3"></hr>
             <footer className="footer">
-              <p>Source code on Github: </p>
+              <p className="px-3">Source code on Github: </p>
               <p>
                 <a
                   href="https://github.com/msaufi2325/todo-front-end-react"
