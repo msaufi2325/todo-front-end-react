@@ -207,6 +207,27 @@ function App() {
               Please login to see your todo list and add new todo items. <br />
               Or register if you don't have an account.
             </h2>
+            <hr className="mt-14 my-3"></hr>
+            <footer className="footer">
+              <p>Source code on Github: </p>
+              <p>
+                <a
+                  href="https://github.com/msaufi2325/todo-front-end-react"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Frontend
+                </a>
+                {" | "}
+                <a
+                  href="https://github.com/msaufi2325/todo-back-end-go"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Backend
+                </a>
+              </p>
+            </footer>
           </div>
         )}
         {jwtToken !== "" && (
