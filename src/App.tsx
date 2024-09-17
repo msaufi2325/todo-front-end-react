@@ -76,9 +76,24 @@ function App() {
             </Link>
           </div>
         ) : (
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span style={{ order: 1 }} className="px-5">{userName}</span>
-            <button style={{ order: 2 }} className="px-5" onClick={logoutHandler}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span
+              style={{
+                order: 1,
+                fontWeight: "bold",
+                fontSize: "16px",
+                color: "#333",
+                marginLeft: "auto",
+              }}
+              className="px-5"
+            >
+              {userName}
+            </span>
+            <button
+              style={{ order: 2 }}
+              className="px-5"
+              onClick={logoutHandler}
+            >
               <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md ">
                 Logout
               </span>
