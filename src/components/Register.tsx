@@ -68,11 +68,13 @@ const Register: React.FC = () => {
             setAlertTitle("Error");
             setAlertMessage(data.message)
             setAlertClass("alert-danger");
+            navigate("/login");
           } else {
             setLoginJwtToken(data.data["access_token"]);
             setLoginUserName(data.data["username"]);
             setLoginUserId(parseInt(data.data["user_id"], 10));
             toggleRefresh(true)
+            navigate("/");
           }
         })
         .catch((error) => {
@@ -80,9 +82,7 @@ const Register: React.FC = () => {
           setAlertMessage(error.message);
           setAlertClass("alert-danger");
         })
-        .finally(() => {
-          navigate("/");
-        });
+
   }
 };
 

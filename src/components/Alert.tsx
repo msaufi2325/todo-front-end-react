@@ -1,5 +1,6 @@
 import { X } from "lucide-react"
 import { useAlertStore } from "../store";
+import { useEffect } from "react";
 
 const getClassName = (alertClass: string) => {
   if (alertClass === "alert-danger") {
@@ -19,9 +20,22 @@ export default function AlertMessage() {
 
   const setAlertClass = useAlertStore((state) => state.setAlertClass);
 
+  const setAlertMessage = useAlertStore((state) => state.setAlertMessage);
+
   const handleCancel = () => {
     setAlertClass("none");
   }
+
+  useEffect(() => {
+    if (alertMessage) {
+      const timer = setTimeout(() => {
+        setAlertClass("none");
+        setAlertMessage("");
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [alertMessage, setAlertClass, setAlertMessage]);
 
   return (
     <>

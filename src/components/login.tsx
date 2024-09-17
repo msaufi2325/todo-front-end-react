@@ -66,6 +66,7 @@ function Login() {
             setAlertTitle("Error");
             setAlertMessage(data.message);
             setAlertClass("alert-danger");
+            navigate("/login");
           } else {
             setLoginJwtToken(data.access_token);
             setLoginUserName(data.username);
@@ -79,11 +80,7 @@ function Login() {
           setAlertMessage(error.message);
           setAlertClass("alert-danger");
         })
-        .finally(() => {
-          // setAlertClass("alert-success");
-          // setAlertMessage(`Welcome back ${loggedUser}`);
-          navigate("/");
-        })
+
     }
   };
 
