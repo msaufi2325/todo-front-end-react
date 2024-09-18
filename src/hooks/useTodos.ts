@@ -28,7 +28,7 @@ export default function useTodos() {
         const i = setInterval(() => {
           // TODO: fix refresh token does not work on page reload
 
-          fetch(`${process.env.REACT_APP_BACKEND}/refresh`, {
+          fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/refresh`, {
             method: "GET",
             credentials: "include",
           })
@@ -57,7 +57,7 @@ export default function useTodos() {
 
   useEffect(() => {
     if (jwtToken !== "") {
-      fetch(`${process.env.REACT_APP_BACKEND}/todos/all`, {
+      fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/todos/all`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function useTodos() {
   useEffect(() => {
     if (jwtToken === "") {
       console.log("fetch refresh token");
-      fetch(`${process.env.REACT_APP_BACKEND}/refresh`, {
+      fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/refresh`, {
         method: "GET",
         credentials: "include",
       })
@@ -97,7 +97,7 @@ export default function useTodos() {
   }, [jwtToken, setJWTToken, toggleRefresh]);
 
   function logout() {
-    fetch(`${process.env.REACT_APP_BACKEND}/logout`, {
+    fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/logout`, {
       method: "GET",
       credentials: "include",
     })
@@ -114,7 +114,7 @@ export default function useTodos() {
   }
 
   async function deleteTodo(id: number) {
-      await fetch(`${process.env.REACT_APP_BACKEND}/todos/${id}`, {
+      await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/todos/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -191,7 +191,7 @@ export default function useTodos() {
       method = "PATCH";
     }
 
-    await fetch(`${process.env.REACT_APP_BACKEND}/todos/${todo.id}`, {
+    await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/todos/${todo.id}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",

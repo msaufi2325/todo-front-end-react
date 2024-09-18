@@ -49,7 +49,7 @@ function Login() {
     }
 
     if (valid) {
-      fetch(`${process.env.REACT_APP_BACKEND}/authenticate`, {
+      fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/authenticate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

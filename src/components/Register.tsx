@@ -54,7 +54,7 @@ const Register: React.FC = () => {
     }
 
     if (valid) {
-      await fetch(`${process.env.REACT_APP_BACKEND}/register`, {
+      await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
