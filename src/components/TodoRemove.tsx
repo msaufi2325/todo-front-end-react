@@ -19,18 +19,18 @@ export default function TodoRemove({
   return (
     <div className="text-left">
       {showDeleted ? (
-        <p className="text-xl px-1">Deleted Todo</p>
+        <p className="text-l px-1">削除されたTodo</p>
       ) : (
         <div className="flex items-center gap-1">
-          <p className="text-xl px-1">
-            {completedTodos.length}/{todos.length} todos completed
-          </p>
+            <p className="text-xl px-1">
+            {completedTodos.length}/{todos.length} のタスクが完了しました
+            </p>
           {completedTodos.length > 0 && (
             <button
               onClick={() => deleteAllCompleted(todos)}
               className="bg-red-500 text-white px-1 rounded-md hover:bg-red-600"
             >
-              Delete completed todo
+              完了したTodoを削除
             </button>
           )}
         </div>

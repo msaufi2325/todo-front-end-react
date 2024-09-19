@@ -93,7 +93,7 @@ function Login() {
           <MyTodo />
         </Link>
         <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in
+          ログイン
         </h2>
         <div className="py-1 col-span-10">
           <AlertMessage />
@@ -112,7 +112,7 @@ function Login() {
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Email address
+              メールアドレス
             </label>
             <div className="mt-2">
               <Input
@@ -132,7 +132,7 @@ function Login() {
                 htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Password
+                パスワード
               </label>
             </div>
             <div className="mt-2">
@@ -152,7 +152,7 @@ function Login() {
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Login
+              ログイン
             </button>
           </div>
         </form>

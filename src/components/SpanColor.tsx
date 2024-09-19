@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Todo } from '../types/todo';
+import { translateToJapanese } from '../types/todo';
 
 type colorType = Todo["category"] | Todo["priority"];
 
@@ -19,7 +20,7 @@ const getColorClass = (colorType: colorType) => {
   } else if (colorType === "low") {
     return "bg-yellow-200 px-1 rounded-md";
   } else if (colorType === "medium") {
-    return "bg-orange-200 px-1 rounded-md";
+    return "bg-orange-200 px-2 rounded-md";
   } else if (colorType === "high") {
     return "bg-red-200 px-1 rounded-md";
   }
@@ -31,7 +32,7 @@ const SpanColor = forwardRef<HTMLSpanElement, SpanColorProps>(({ colorType }, re
 
   return (
     <span ref={ref} className={colorClass}>
-      {colorType}
+      {translateToJapanese(colorType)}
     </span>
   );
 });

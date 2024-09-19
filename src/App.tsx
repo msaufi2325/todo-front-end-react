@@ -66,12 +66,12 @@ function App() {
           <div className="text-end">
             <Link className="px-1" to="/login">
               <span className="bg-green-500 hover:bg-green-800 text-white p-1 rounded-md">
-                Login
+                ログイン
               </span>
             </Link>
             <Link to="/register" className="px-1">
               <span className="bg-blue-500 hover:bg-blue-800 text-white p-1 rounded-md">
-                Register
+                新規登録
               </span>
             </Link>
           </div>
@@ -95,7 +95,7 @@ function App() {
               onClick={logoutHandler}
             >
               <span className="bg-red-500 hover:bg-red-800 text-white p-1 rounded-md ">
-                Logout
+                ログアウト
               </span>
             </button>
           </div>
@@ -114,7 +114,7 @@ function App() {
                   <span className="text-2xl bg-green-300 px-1 rounded-md hover:bg-green-500">
                     <TodoModal
                       todo={newTodo}
-                      title="Add New"
+                      title="新規追加"
                       onUpdate={editTodo}
                     />
                   </span>
@@ -144,7 +144,7 @@ function App() {
                       : "bg-gray-200 hover:bg-gray-500"
                   }`}
                 >
-                  Category:
+                  カテゴリ：
                 </span>
               </h2>
             </button>
@@ -157,7 +157,7 @@ function App() {
                       : "bg-purple-200 hover:bg-purple-500"
                   }`}
                 >
-                  Work
+                  仕事
                 </span>
               </h2>
             </button>
@@ -170,7 +170,7 @@ function App() {
                       : "bg-green-200 hover:bg-green-500"
                   }`}
                 >
-                  Home
+                  家事
                 </span>
               </h2>
             </button>
@@ -183,7 +183,7 @@ function App() {
                       : "bg-blue-200 hover:bg-blue-500"
                   }`}
                 >
-                  Hobby
+                  趣味
                 </span>
               </h2>
             </button>
@@ -196,7 +196,7 @@ function App() {
                       : "bg-teal-200 hover:bg-teal-500"
                   }`}
                 >
-                  Others
+                  その他
                 </span>
               </h2>
             </button>
@@ -204,12 +204,12 @@ function App() {
         ) : (
           <div className="px-5">
             <h2>
-              Please login to see your todo list and add new todo items. <br />
-              Or register if you don't have an account.
+              ログインしてToDoリストを確認し、新しいToDoアイテムを追加／編集できます。<br />
+              アカウントをお持ちでない場合は、新規登録を行ってください。ダミーのメールアドレスでも登録できます。
             </h2>
             <hr className="mt-14 my-3"></hr>
             <footer className="footer">
-              <p className="px-3">Source code on Github: </p>
+                <p className="px-3">ソースコードはGithubにあります: </p>
               <p>
                 <a
                   href="https://github.com/msaufi2325/todo-front-end-react"
@@ -244,7 +244,7 @@ function App() {
                         : "bg-gray-200 hover:bg-gray-500"
                     }`}
                   >
-                    Priority:
+                    優先度：
                   </span>
                 </h2>
               </button>
@@ -257,20 +257,20 @@ function App() {
                         : "bg-yellow-200 hover:bg-yellow-500"
                     }`}
                   >
-                    Low
+                    低い
                   </span>
                 </h2>
               </button>
               <button onClick={() => setSelectedPriority("medium")}>
                 <h2 className="font-semibold text-l p-1">
                   <span
-                    className={`px-1 rounded-md ${
+                    className={`px-3 rounded-md ${
                       selectedPriority === "medium"
                         ? "bg-orange-500 text-white"
                         : "bg-orange-200 hover:bg-orange-500"
                     }`}
                   >
-                    Medium
+                    中
                   </span>
                 </h2>
               </button>
@@ -283,7 +283,7 @@ function App() {
                         : "bg-red-200 hover:bg-red-500"
                     }`}
                   >
-                    High
+                    高い
                   </span>
                 </h2>
               </button>

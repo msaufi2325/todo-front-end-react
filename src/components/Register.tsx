@@ -93,7 +93,7 @@ const Register: React.FC = () => {
           <MyTodo />
         </Link>
         <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Register
+          新規登録
         </h2>
       </div>
 
@@ -109,7 +109,7 @@ const Register: React.FC = () => {
               htmlFor="username"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Username
+              ウザーネーム
             </label>
             <div className="mt-2">
               <Input
@@ -128,7 +128,7 @@ const Register: React.FC = () => {
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Email address
+              メールアドレス
             </label>
             <div className="mt-2">
               <Input
@@ -148,7 +148,7 @@ const Register: React.FC = () => {
                 htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Password
+                パスワード
               </label>
             </div>
             <div className="mt-2">
@@ -168,7 +168,7 @@ const Register: React.FC = () => {
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Register
+              新規登録
             </button>
           </div>
         </form>

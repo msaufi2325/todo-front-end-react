@@ -2,3 +2,9 @@
   /* Modal specific styles */
   font-size: 1rem; /* Ensure default font size */
 }
+
+@media (max-width: 600px) {
+  .modal {
+    transform: translate(0, -55%);
+  }
+}

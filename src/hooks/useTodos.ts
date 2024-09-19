@@ -160,6 +160,7 @@ export default function useTodos() {
   }
 
   function addTodo(newTodo: Todo) {
+    resetNewTodo();
     setTodos((prevTodos) => {
       if (!prevTodos) {
         prevTodos = [];

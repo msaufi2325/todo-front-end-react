@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Todo } from "../types/todo";
 import { useShowDeletedStore } from "../store";
 import styles from "./TodoModal.module.css";
+import { translateToJapanese } from '../types/todo';
+
 
 interface TodoModalProps {
   title: string;
@@ -119,7 +121,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none p-3">
                 <form className="flex flex-col">
                   <label className="text-xl font-semibold" htmlFor="name">
-                    Title:
+                    タイトル
                   </label>
                   <input
                     type="text"
@@ -132,7 +134,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                   />
                   {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                   <label className="relative mt-4" htmlFor="description">
-                    Description:
+                    詳細
                   </label>
                   <textarea
                     name="description"
@@ -145,7 +147,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                 </form>
                 <div className="flex items-center">
                   <label className="p-1">
-                    Category:
+                    カテゴリ：
                     <select
                       name="category"
                       value={editedTodo.category}
@@ -155,13 +157,13 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     >
                       {categoryOptions.map((category) => (
                         <option key={category} value={category}>
-                          {category}
+                          {translateToJapanese(category)}
                         </option>
                       ))}
                     </select>
                   </label>
                   <label className="p-1">
-                    Priority:
+                    優先度：
                     <select
                       name="priority"
                       value={editedTodo.priority}
@@ -171,7 +173,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     >
                       {priorityOptions.map((priority) => (
                         <option key={priority} value={priority}>
-                          {priority}
+                          {translateToJapanese(priority)}
                         </option>
                       ))}
                     </select>
@@ -180,8 +182,8 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                 <hr className="my-2" />
                 {todo.title && (
                   <p className="text-sm text-gray-500">
-                    Created: {formattedDateCreatedAt} <br />
-                    Last updated: {formattedDate}
+                    作成日時: {formattedDateCreatedAt} <br />
+                    更新日時: {formattedDate}
                     
                   </p>
                 )}
@@ -191,7 +193,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                     type="button"
                     onClick={handleCancel}
                   >
-                    {showDeleted ? "Close" : "Cancel"}
+                    {showDeleted ? "閉じる" : "キャンセル"}
                   </button>
                   {!showDeleted && (
                     <button
@@ -199,7 +201,7 @@ export default function TodoModal({ title, todo, onUpdate }: TodoModalProps) {
                       className="text-white bg-green-600 rounded-md font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 m-2 ease-linear transition-all duration-150"
                       onClick={handleSubmit}
                     >
-                      Save
+                      保存
                     </button>
                   )}
                 </div>
