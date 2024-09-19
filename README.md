@@ -10,6 +10,6 @@ password: password
 Backend code: https://github.com/msaufi2325/todo-back-end-go
 
 Stacks used:
-- Frontend: React, Vite, Typescript, Tailwindcss
-- Backend: Go
+- Frontend: React, Typescript, Tailwindcss
+- Backend: Go, PostgreSQL
 - Infra: Hostinger(vps), Caddy(webserver)
