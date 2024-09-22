@@ -1,4 +1,3 @@
-App is deployed at:
 # Todo App
 
 [Live Demo](https://todo-app.m-saufi.com/)
