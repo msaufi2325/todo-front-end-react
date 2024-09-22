@@ -4,6 +4,7 @@ import MyTodo from "./MyTodo";
 import { useAlertStore, useJwtStore, useUserStore } from '../store';
 import Input from './form/Input';
 import useTodos from '../hooks/useTodos';
+import AlertMessage from './Alert';
 
 
 const Register: React.FC = () => {
@@ -68,7 +69,7 @@ const Register: React.FC = () => {
             setAlertTitle("Error");
             setAlertMessage(data.message)
             setAlertClass("alert-danger");
-            navigate("/login");
+            navigate("/register");
           } else {
             setLoginJwtToken(data.data["access_token"]);
             setLoginUserName(data.data["username"]);
@@ -81,6 +82,7 @@ const Register: React.FC = () => {
           setAlertTitle("Error");
           setAlertMessage(error.message);
           setAlertClass("alert-danger");
+          navigate("/register");
         })
 
   }
@@ -95,6 +97,9 @@ const Register: React.FC = () => {
         <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-gray-900">
           新規登録
         </h2>
+        <div className="py-1 col-span-10">
+          <AlertMessage />
+        </div>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
