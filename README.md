@@ -1,15 +1,18 @@
 App is deployed at:
-https://todo-app.m-saufi.com/
+# Todo App
 
-Registration also works with dummy email.
+[Live Demo](https://todo-app.m-saufi.com/)
 
-Test account:
-email: test1@email.com
-password: password
+Registration also works with a dummy email.
 
-Backend code: https://github.com/msaufi2325/todo-back-end-go
+## Test Account
+- **Email:** test1@email.com
+- **Password:** password
 
-Stacks used:
-- Frontend: React, Typescript, Tailwindcss
-- Backend: Go, PostgreSQL
-- Infra: Hostinger(vps), Caddy(webserver)
+## Backend Code
+[GitHub Repository](https://github.com/msaufi2325/todo-back-end-go)
+
+## Stacks Used
+- **Frontend:** React, TypeScript, Tailwind CSS
+- **Backend:** Go, PostgreSQL
+- **Infrastructure:** Hostinger (VPS), Caddy (web server)
