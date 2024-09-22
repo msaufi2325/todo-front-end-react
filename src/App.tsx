@@ -204,12 +204,12 @@ function App() {
         ) : (
           <div className="px-5">
             <h2>
-              ログインしてToDoリストを確認し、新しいToDoアイテムを追加／編集できます。<br />
-              アカウントをお持ちでない場合は、新規登録を行ってください。ダミーのメールアドレスでも登録できます。
+            ログインしてTodoリストをご確認いただき、新しいTodoアイテムを追加・編集することができます。<br />
+            アカウントをお持ちでない場合は、新規登録をお願いいたします。ダミーのメールアドレスでもご登録いただけます。
             </h2>
             <hr className="mt-14 my-3"></hr>
             <footer className="footer">
-                <p className="px-3">ソースコードはGithubにあります: </p>
+                <p className="px-3">ソースコードはGithubよりご確認できます: </p>
               <p>
                 <a
                   href="https://github.com/msaufi2325/todo-front-end-react"

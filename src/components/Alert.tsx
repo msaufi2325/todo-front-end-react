@@ -43,7 +43,7 @@ export default function AlertMessage() {
         <div className={getClassName(alertClass)} role="alert">
           <strong className="font-bold">{alertTitle}</strong>
           <span className="px-1 pr-2 block sm:inline">{alertMessage}</span>
-          <span className="absolute top-0 bottom-0 right-0 px-4 py-3" style={{ cursor: "pointer" }}>
+          <span className="absolute top-0 bottom-0 right-0 pl-3 px-3 py-3" style={{ cursor: "pointer" }}>
             <X onClick={handleCancel} />
           </span>
         </div>
