@@ -33,21 +33,21 @@ const Register: React.FC = () => {
     let valid = true;
 
     if (!username) {
-      setUsernameError('Username is required');
+      setUsernameError('ユーザーネームは必須です');
       valid = false;
     } else {
       setUsernameError('');
     }
 
     if (!email) {
-      setEmailError('Email is required');
+      setEmailError('メールアドレスは必須です');
       valid = false;
     } else {
       setEmailError('');
     }
 
     if (!password) {
-      setPasswordError('Password is required');
+      setPasswordError('パスワードは必須です');
       valid = false;
     } else {
       setPasswordError('');
@@ -109,7 +109,7 @@ const Register: React.FC = () => {
               htmlFor="username"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              ウザーネーム
+              ユーザーネーム
             </label>
             <div className="mt-2">
               <Input

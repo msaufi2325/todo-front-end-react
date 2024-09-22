@@ -35,14 +35,14 @@ function Login() {
     let valid = true;
 
     if (!email) {
-      setEmailError("Email is required");
+      setEmailError("メールアドレスは必須です");
       valid = false;
     } else {
       setEmailError("");
     }
 
     if (!password) {
-      setPasswordError("Password is required");
+      setPasswordError("パスワードは必須です");
       valid = false;
     } else {
       setPasswordError("");
