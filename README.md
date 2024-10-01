@@ -1,6 +1,6 @@
 # Todo App
 
-[Live Demo](https://todo-app.m-saufi.com/)
+[Live App](https://todo-app.m-saufi.com/)
 
 Registration also works with a dummy email.
 
